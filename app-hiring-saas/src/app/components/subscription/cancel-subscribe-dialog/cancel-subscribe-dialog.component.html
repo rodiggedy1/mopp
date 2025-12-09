@@ -1,0 +1,515 @@
+<div class="bg-white rounded-lg shadow-xl w-full max-h-[95vh] overflow-y-auto" *ngIf="activeStep == 1">
+   <div class="border-b border-gray-200 px-4 md:px-6 py-3 md:py-4 flex items-center justify-between sticky top-0 bg-white z-10">
+      <h1 class="text-base md:text-xl font-semibold text-gray-900">Subscription and Billing / Cancel Trial</h1>
+      <button class="text-gray-400 hover:text-gray-600 transition-colors" aria-label="Close" (click)="closeDialog()">
+         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5 md:w-6 md:h-6">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+         </svg>
+      </button>
+   </div>
+   <div class="px-4 md:px-8 py-6 md:py-8">
+      <div class="flex flex-col lg:flex-row gap-8 items-center">
+         <div class="flex-1 text-center lg:text-left">
+            <div class="flex justify-center lg:justify-start mb-4 md:mb-6">
+               <div class="w-12 h-12 md:w-16 md:h-16 bg-red-100 rounded-full flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-6 h-6 md:w-8 md:h-8 text-red-600">
+                     <path d="M18 6 6 18"></path>
+                     <path d="m6 6 12 12"></path>
+                  </svg>
+               </div>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 mb-2 md:mb-3">Are You Sure?</h2>
+            <p class="text-base md:text-lg text-gray-600 mb-4 md:mb-6 leading-relaxed">You still have 14 days left in your trial. By canceling your trial, you will immediately lose access to the platform.</p>
+            <div class="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-2 md:gap-3 justify-center lg:justify-start">
+                <button (click)="closeDialog()" class="px-6 md:px-8 py-2.5 md:py-3 text-sm md:text-base font-semibold text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors shadow-md hover:shadow-lg">I'll keep my Plan</button>
+                <button (click)="changeStepTo(2)" class="px-6 md:px-8 py-2.5 md:py-3 text-sm md:text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">Cancel Trial</button>
+            </div>
+         </div>
+         <div class="flex-1 w-full">
+            <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-4 md:p-6">
+               <h3 class="text-lg md:text-xl font-semibold text-gray-900 mb-4 md:mb-5">Effective immediately:</h3>
+               <div class="space-y-3 md:space-y-4">
+                  <div class="flex items-start gap-2 md:gap-3">
+                     <div class="flex-shrink-0 w-6 h-6 md:w-8 md:h-8 bg-red-500 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-4 h-4 md:w-5 md:h-5 text-white">
+                           <path d="M18 6 6 18"></path>
+                           <path d="m6 6 12 12"></path>
+                        </svg>
+                     </div>
+                     <p class="text-sm md:text-base text-gray-900 pt-0.5">You will lose access to the platform</p>
+                  </div>
+                  <div class="flex items-start gap-2 md:gap-3">
+                     <div class="flex-shrink-0 w-6 h-6 md:w-8 md:h-8 bg-red-500 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-4 h-4 md:w-5 md:h-5 text-white">
+                           <path d="M18 6 6 18"></path>
+                           <path d="m6 6 12 12"></path>
+                        </svg>
+                     </div>
+                     <p class="text-sm md:text-base text-gray-900 pt-0.5">You will lose access to hiring website</p>
+                  </div>
+                  <div class="flex items-start gap-2 md:gap-3">
+                     <div class="flex-shrink-0 w-6 h-6 md:w-8 md:h-8 bg-red-500 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-4 h-4 md:w-5 md:h-5 text-white">
+                           <path d="M18 6 6 18"></path>
+                           <path d="m6 6 12 12"></path>
+                        </svg>
+                     </div>
+                     <p class="text-sm md:text-base text-gray-900 pt-0.5">You will lose access to all applicant data</p>
+                  </div>
+                  <div class="flex items-start gap-2 md:gap-3">
+                     <div class="flex-shrink-0 w-6 h-6 md:w-8 md:h-8 bg-red-500 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-4 h-4 md:w-5 md:h-5 text-white">
+                           <path d="M18 6 6 18"></path>
+                           <path d="m6 6 12 12"></path>
+                        </svg>
+                     </div>
+                     <p class="text-sm md:text-base text-gray-900 pt-0.5">You will lose access to the core aspects of your business: Your Staff</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="bg-white rounded-lg shadow-xl w-full max-h-[95vh] overflow-y-auto" *ngIf="activeStep == 2">
+   <div class="border-b border-gray-200 px-4 md:px-6 py-3 md:py-4 flex items-center justify-between sticky top-0 bg-white z-10">
+      <h1 class="text-base md:text-xl font-semibold text-gray-900">Subscription and Billing / Pause Subscription</h1>
+      <button class="text-gray-400 hover:text-gray-600 transition-colors" aria-label="Close" (click)="closeDialog()">
+         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5 md:w-6 md:h-6">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+         </svg>
+      </button>
+   </div>
+   <div class="px-4 md:px-8 py-6 md:py-8">
+      <div class="flex flex-col lg:flex-row gap-8 items-center">
+         <div class="flex-1 text-center lg:text-left">
+            <div class="flex justify-center lg:justify-start mb-4 md:mb-6">
+               <div class="w-12 h-12 md:w-16 md:h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pause w-6 h-6 md:w-8 md:h-8 text-blue-600">
+                     <rect width="4" height="16" x="6" y="4"></rect>
+                     <rect width="4" height="16" x="14" y="4"></rect>
+                  </svg>
+               </div>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 mb-2 md:mb-3">Not Ready to Say Goodbye?</h2>
+            <p class="text-base md:text-lg text-gray-600 mb-4 md:mb-6 leading-relaxed">Pause your subscription for 2 months instead of canceling. Keep all your data safe and come back when you're ready to resume.</p>
+            <div class="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-2 md:gap-3 justify-center lg:justify-start">
+                <button (click)="pasueForTwoMonts()" class="px-6 md:px-8 py-2.5 md:py-3 text-sm md:text-base font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg">Pause for 2 Months</button>
+                <button (click)="changeStepTo(3)" class="px-6 md:px-8 py-2.5 md:py-3 text-sm md:text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">Continue to Cancel</button></div>
+         </div>
+         <div class="flex-1 w-full">
+            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 md:p-6">
+               <h3 class="text-lg md:text-xl font-semibold text-gray-900 mb-4 md:mb-5">What you keep when you pause:</h3>
+               <div class="space-y-3 md:space-y-4">
+                  <div class="flex items-start gap-2 md:gap-3">
+                     <div class="flex-shrink-0 w-6 h-6 md:w-8 md:h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                     </div>
+                     <p class="text-sm md:text-base text-gray-900 pt-0.5">All your applicant data remains secure and accessible when you return</p>
+                  </div>
+                  <div class="flex items-start gap-2 md:gap-3">
+                     <div class="flex-shrink-0 w-6 h-6 md:w-8 md:h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                     </div>
+                     <p class="text-sm md:text-base text-gray-900 pt-0.5">Your hiring website stays configured and ready to relaunch</p>
+                  </div>
+                  <div class="flex items-start gap-2 md:gap-3">
+                     <div class="flex-shrink-0 w-6 h-6 md:w-8 md:h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                     </div>
+                     <p class="text-sm md:text-base text-gray-900 pt-0.5">Resume anytime within 2 months with no setup required</p>
+                  </div>
+                  <div class="flex items-start gap-2 md:gap-3">
+                     <div class="flex-shrink-0 w-6 h-6 md:w-8 md:h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-4 h-4 md:w-5 md:h-5 text-white">
+                           <path d="M8 2v4"></path>
+                           <path d="M16 2v4"></path>
+                           <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                           <path d="M3 10h18"></path>
+                        </svg>
+                     </div>
+                     <p class="text-sm md:text-base text-gray-900 pt-0.5">No charges during your 2-month pause period</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="bg-white rounded-lg shadow-xl w-full max-h-[95vh] overflow-y-auto" *ngIf="activeStep == 3">
+   <div class="border-b border-gray-200 px-4 md:px-6 py-3 md:py-4 flex items-center justify-between sticky top-0 bg-white z-10">
+      <h1 class="text-base md:text-xl font-semibold text-gray-900">Subscription and Billing / Special Offer</h1>
+      <button class="text-gray-400 hover:text-gray-600 transition-colors" aria-label="Close" (click)="closeDialog()">
+         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5 md:w-6 md:h-6">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+         </svg>
+      </button>
+   </div>
+   <div class="px-4 md:px-8 py-6 md:py-8">
+      <div class="flex flex-col lg:flex-row gap-8 items-center">
+         <div class="flex-1 text-center lg:text-left">
+            <div class="flex justify-center lg:justify-start mb-4 md:mb-6">
+               <div class="w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag w-6 h-6 md:w-8 md:h-8 text-green-600">
+                     <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"></path>
+                     <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                  </svg>
+               </div>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 mb-2 md:mb-3">Wait! Here's 50% Off</h2>
+            <p class="text-base md:text-lg text-gray-600 mb-2 leading-relaxed">We'd hate to see you go. Stay with us and get <span class="font-semibold text-green-600">50% off for the next 3 months</span>.</p>
+            <p class="text-sm md:text-base text-gray-500 mb-4 md:mb-6">That's just $24.50/month instead of $49/month</p>
+            <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-3 md:p-4 mb-4 md:mb-6 border border-green-200">
+               <div class="flex items-start gap-2 md:gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone w-5 h-5 md:w-6 md:h-6 text-green-600 flex-shrink-0 mt-0.5">
+                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
+                  <div>
+                     <h3 class="text-sm md:text-base font-semibold text-gray-900 mb-1">Exclusive Bonus: Free Onboarding Call</h3>
+                     <p class="text-xs md:text-sm text-gray-700">Get expert hiring tips and maximize your ROI with a personalized strategy session</p>
+                  </div>
+               </div>
+            </div>
+            <div class="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-2 md:gap-3 justify-center lg:justify-start">
+                <button (click)="claimFiftyPercentOff()" class="px-6 md:px-8 py-2.5 md:py-3 text-sm md:text-base font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors shadow-md hover:shadow-lg">Claim 50% Off + Bonus Call</button>
+                <button (click)="changeStepTo(4)" class="px-6 md:px-8 py-2.5 md:py-3 text-sm md:text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">No Thanks</button></div>
+         </div>
+         <div class="flex-1 w-full">
+            <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-4 md:p-6">
+               <h3 class="text-lg md:text-xl font-semibold text-gray-900 mb-4 md:mb-5">Everything you get:</h3>
+               <div class="space-y-3 md:space-y-4">
+                  <div class="flex items-start gap-2 md:gap-3">
+                     <div class="flex-shrink-0 w-6 h-6 md:w-8 md:h-8 bg-green-600 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle w-4 h-4 md:w-5 md:h-5 text-white">
+                           <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                           <path d="m9 11 3 3L22 4"></path>
+                        </svg>
+                     </div>
+                     <p class="text-sm md:text-base text-gray-900 pt-0.5">Full access to the platform at 50% off for 3 months</p>
+                  </div>
+                  <div class="flex items-start gap-2 md:gap-3">
+                     <div class="flex-shrink-0 w-6 h-6 md:w-8 md:h-8 bg-green-600 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle w-4 h-4 md:w-5 md:h-5 text-white">
+                           <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                           <path d="m9 11 3 3L22 4"></path>
+                        </svg>
+                     </div>
+                     <p class="text-sm md:text-base text-gray-900 pt-0.5">Your hiring website stays live and active</p>
+                  </div>
+                  <div class="flex items-start gap-2 md:gap-3">
+                     <div class="flex-shrink-0 w-6 h-6 md:w-8 md:h-8 bg-green-600 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle w-4 h-4 md:w-5 md:h-5 text-white">
+                           <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                           <path d="m9 11 3 3L22 4"></path>
+                        </svg>
+                     </div>
+                     <p class="text-sm md:text-base text-gray-900 pt-0.5">Unlimited applicant tracking and management</p>
+                  </div>
+                  <div class="flex items-start gap-2 md:gap-3">
+                     <div class="flex-shrink-0 w-6 h-6 md:w-8 md:h-8 bg-green-600 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle w-4 h-4 md:w-5 md:h-5 text-white">
+                           <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                           <path d="m9 11 3 3L22 4"></path>
+                        </svg>
+                     </div>
+                     <p class="text-sm md:text-base text-gray-900 pt-0.5">Full team collaboration features</p>
+                  </div>
+                  <div class="flex items-start gap-2 md:gap-3">
+                     <div class="flex-shrink-0 w-6 h-6 md:w-8 md:h-8 bg-green-600 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle w-4 h-4 md:w-5 md:h-5 text-white">
+                           <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                           <path d="m9 11 3 3L22 4"></path>
+                        </svg>
+                     </div>
+                     <p class="text-sm md:text-base text-gray-900 pt-0.5">Priority customer support</p>
+                  </div>
+                  <div class="flex items-start gap-2 md:gap-3">
+                     <div class="flex-shrink-0 w-6 h-6 md:w-8 md:h-8 bg-green-600 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone w-4 h-4 md:w-5 md:h-5 text-white">
+                           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                     </div>
+                     <p class="text-sm md:text-base text-gray-900 pt-0.5 font-semibold">Free 30-minute onboarding call with hiring experts</p>
+                  </div>
+               </div>
+               <div class="mt-4 md:mt-6 pt-4 md:pt-6 border-t border-green-200">
+                  <div class="flex flex-wrap items-baseline gap-1.5 md:gap-2"><span class="text-2xl md:text-3xl font-bold text-gray-900">$24.50</span><span class="text-base md:text-lg text-gray-500 line-through">$49</span><span class="text-xs md:text-sm text-gray-600">/month for 3 months</span></div>
+                  <p class="text-xs md:text-sm text-gray-600 mt-1">Save $73.50 over the next 3 months</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="bg-white rounded-lg shadow-xl w-full max-h-[95vh] overflow-y-auto" *ngIf="activeStep == 4">
+   <div class="border-b border-gray-200 px-4 md:px-6 py-3 md:py-4 flex items-center justify-between sticky top-0 bg-white z-10">
+      <h1 class="text-base md:text-xl font-semibold text-gray-900">Subscription and Billing / Help Us Improve</h1>
+      <button class="text-gray-400 hover:text-gray-600 transition-colors" aria-label="Close" (click)="closeDialog()">
+         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5 md:w-6 md:h-6">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+         </svg>
+      </button>
+   </div>
+   <div class="px-4 md:px-8 py-6 md:py-8">
+      <div class="flex flex-col lg:flex-row gap-6 md:gap-8 items-start">
+         <div class="flex-1 text-center lg:text-left">
+            <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 mb-2 md:mb-3">Before You Go...</h2>
+            <p class="text-base md:text-lg text-gray-600 mb-6 md:mb-8 leading-relaxed">Help us understand why you're leaving. We might have the perfect solution for you.</p>
+            <div class="space-y-2 md:space-y-3">
+               <button [ngClass]="selectedReason == 'expensive' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300 bg-white'" (click)="selectedReason = 'expensive'" class="w-full flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-lg border-2 transition-all">
+                  <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center" [ngClass]="selectedReason == 'expensive' ? 'bg-blue-600' : 'bg-gray-200'">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-dollar-sign w-5 h-5 md:w-6 md:h-6 " [ngClass]="selectedReason == 'expensive' ? 'text-white' : 'text-gray-600'">
+                        <line x1="12" x2="12" y1="2" y2="22"></line>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                     </svg>
+                  </div>
+                  <span class="text-sm md:text-base font-medium text-gray-900">Too expensive</span>
+               </button>
+               <button [ngClass]="selectedReason == 'technical-issue' ? 'border-orange-500 bg-orange-50' : 'border-gray-200 hover:border-gray-300 bg-white'" (click)="selectedReason = 'technical-issue'" class="w-full flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-lg border-2 transition-all">
+                  <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center" [ngClass]="selectedReason == 'technical-issue' ? 'bg-orange-600' : 'bg-gray-200'">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wrench w-5 h-5 md:w-6 md:h-6" [ngClass]="selectedReason == 'technical-issue' ? 'text-white' : 'text-gray-600'">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                     </svg>
+                  </div>
+                  <span class="text-sm md:text-base font-medium text-gray-900">Technical issues</span>
+               </button>
+               <button [ngClass]="selectedReason == 'missing-features' ? 'border-purple-500 bg-purple-50' : 'border-gray-200 hover:border-gray-300 bg-white'" (click)="selectedReason = 'missing-features'" class="w-full flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-lg border-2 transition-all">
+                  <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center" [ngClass]="selectedReason == 'missing-features' ? 'bg-purple-600' : 'bg-gray-200'">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus w-5 h-5 md:w-6 md:h-6" [ngClass]="selectedReason == 'missing-features' ? 'text-white' : 'text-gray-600'">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5v14"></path>
+                     </svg>
+                  </div>
+                  <span class="text-sm md:text-base font-medium text-gray-900">Missing features</span>
+               </button>
+               <button [ngClass]="selectedReason == 'other' ? 'border-gray-500 bg-gray-50' : 'border-gray-200 hover:border-gray-300 bg-white'" (click)="selectedReason = 'other'" class="w-full flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-lg border-2 transition-all">
+                  <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center" [ngClass]="selectedReason == 'other' ? 'bg-gray-600' : 'bg-gray-200'">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square w-5 h-5 md:w-6 md:h-6" [ngClass]="selectedReason == 'other' ? 'text-white' : 'text-gray-600'">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                     </svg>
+                  </div>
+                  <span class="text-sm md:text-base font-medium text-gray-900">Other reason</span>
+               </button>
+            </div>
+         </div>
+         <div class="flex-1 w-full">
+
+            <div class="bg-gray-50 rounded-xl p-6 md:p-8 h-full flex items-center justify-center border border-gray-200" *ngIf="!selectedReason">
+               <p class="text-sm md:text-base text-gray-500 text-center">Select a reason to see how we can help</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-4 md:p-6 border border-blue-200" *ngIf="selectedReason == 'expensive'">
+                <div class="flex justify-center mb-3 md:mb-4">
+                    <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gift w-5 h-5 md:w-6 md:h-6 text-white">
+                            <rect x="3" y="8" width="18" height="4" rx="1"></rect>
+                            <path d="M12 8v13"></path>
+                            <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
+                            <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
+                        </svg>
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-gray-900 mb-2 md:mb-3 text-center">Get 1 Month Free</h3>
+                <p class="text-sm md:text-base text-gray-700 mb-3 md:mb-4 text-center">We understand budget constraints. Let us give you <span class="font-semibold text-blue-600">1 full month completely free</span> to help you see the value and grow your business.</p>
+                <p class="text-xs md:text-sm text-gray-600 text-center mb-4 md:mb-6">No credit card required during your free month</p>
+                <div class="flex flex-col gap-2 md:gap-3">
+                    <button (click)="extendTrialOneMonth()" class="w-full px-5 md:px-6 py-2.5 md:py-3 text-sm md:text-base font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg">Claim Free Month</button>
+                    <button (click)="changeStepTo(5)" class="w-full px-5 md:px-6 py-2.5 md:py-3 text-sm md:text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">No Thanks, Cancel</button>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-4 md:p-6 border border-orange-200" *ngIf="selectedReason == 'technical-issue'">
+                <div class="flex justify-center mb-3 md:mb-4">
+                    <div class="w-10 h-10 md:w-12 md:h-12 bg-orange-600 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone w-5 h-5 md:w-6 md:h-6 text-white">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-gray-900 mb-2 md:mb-3 text-center">Let's Fix This Together</h3>
+                <p class="text-sm md:text-base text-gray-700 mb-3 md:mb-4 text-center">Technical issues shouldn't stop your success. Our support team is ready to help you right now.</p>
+                <div class="bg-white rounded-lg p-3 md:p-4 mb-4 md:mb-6 border border-orange-300">
+                    <p class="text-xs md:text-sm text-gray-600 mb-1 md:mb-2 text-center">Text us directly:</p>
+                    <p class="text-2xl md:text-3xl font-bold text-orange-600 text-center">725-227-6585</p>
+                    <p class="text-xs text-gray-500 mt-1 md:mt-2 text-center">Average response time: 5 minutes</p>
+                </div>
+                <div class="flex flex-col gap-2 md:gap-3">
+                    <button (click)="sendImprovement('technical-issue')" class="w-full px-5 md:px-6 py-2.5 md:py-3 text-sm md:text-base font-semibold text-white bg-orange-600 rounded-lg hover:bg-orange-700 transition-colors shadow-md hover:shadow-lg">Keep Plan &amp; Get Support</button>
+                    <button (click)="changeStepTo(5)" class="w-full px-5 md:px-6 py-2.5 md:py-3 text-sm md:text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">No Thanks, Cancel</button>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4 md:p-6 border border-purple-200" *ngIf="selectedReason == 'missing-features'">
+                <div class="flex justify-center mb-3 md:mb-4">
+                    <div class="w-10 h-10 md:w-12 md:h-12 bg-purple-600 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus w-5 h-5 md:w-6 md:h-6 text-white">
+                            <path d="M5 12h14"></path>
+                            <path d="M12 5v14"></path>
+                        </svg>
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-gray-900 mb-2 md:mb-3 text-center">We'll Build It For You</h3>
+                <p class="text-sm md:text-base text-gray-700 mb-3 md:mb-4 text-center">Tell us what feature you need, and we'll build it within <span class="font-semibold text-purple-600">30 days</span>.</p>
+                <textarea placeholder="Describe the feature you need..." [(ngModel)]="missingFeaturesValue" class="w-full px-3 md:px-4 py-2.5 md:py-3 text-sm md:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none mb-4 md:mb-6" rows="4"></textarea>
+                <div class="flex flex-col gap-2 md:gap-3">
+                    <button (click)="sendImprovement('FeatureRequest')" class="w-full px-5 md:px-6 py-2.5 md:py-3 text-sm md:text-base font-semibold text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors shadow-md hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed" [disabled]="!missingFeaturesValue">Submit Feature Request</button>
+                    <button (click)="changeStepTo(5)" class="w-full px-5 md:px-6 py-2.5 md:py-3 text-sm md:text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">No Thanks, Cancel</button>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-gray-50 to-slate-50 rounded-xl p-4 md:p-6 border border-gray-200" *ngIf="selectedReason == 'other'">
+                <div class="flex justify-center mb-3 md:mb-4">
+                    <div class="w-10 h-10 md:w-12 md:h-12 bg-gray-600 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square w-5 h-5 md:w-6 md:h-6 text-white">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-gray-900 mb-2 md:mb-3 text-center">Help Us Understand</h3>
+                <p class="text-sm md:text-base text-gray-700 mb-3 md:mb-4 text-center">Please share more details about your reason for leaving so we can make things right.</p>
+                <textarea placeholder="Tell us what's on your mind..." [(ngModel)]="otherReasonValue" class="w-full px-3 md:px-4 py-2.5 md:py-3 text-sm md:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent resize-none mb-4 md:mb-6" rows="4"></textarea>
+                <div class="flex flex-col gap-2 md:gap-3">
+                    <button (click)="sendImprovement('CancellationReason')" class="w-full px-5 md:px-6 py-2.5 md:py-3 text-sm md:text-base font-semibold text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors shadow-md hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed" [disabled]="!otherReasonValue">Submit Feedback</button>
+                    <button (click)="changeStepTo(5)" class="w-full px-5 md:px-6 py-2.5 md:py-3 text-sm md:text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">No Thanks, Cancel</button>
+                </div>
+            </div>
+
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="bg-white rounded-lg shadow-xl w-full overflow-y-auto" *ngIf="activeStep == 5">
+   <div class="border-b border-gray-200 px-4 md:px-6 py-3 md:py-4 flex items-center justify-between sticky top-0 bg-white z-10">
+      <h1 class="text-base md:text-xl font-semibold text-gray-900">Subscription and Billing / Final Confirmation</h1>
+      <button class="text-gray-400 hover:text-gray-600 transition-colors" aria-label="Close">
+         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5 md:w-6 md:h-6">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+         </svg>
+      </button>
+   </div>
+   <div class="px-4 md:px-8 py-6 md:py-8">
+      <div class="text-center mb-6 md:mb-8">
+         <div class="flex justify-center mb-4 md:mb-6">
+            <div class="w-12 h-12 md:w-16 md:h-16 bg-red-100 rounded-full flex items-center justify-center">
+               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-alert-circle w-6 h-6 md:w-8 md:h-8 text-red-600">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" x2="12" y1="8" y2="12"></line>
+                  <line x1="12" x2="12.01" y1="16" y2="16"></line>
+               </svg>
+            </div>
+         </div>
+         <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 mb-2 md:mb-3">Are You Sure?</h2>
+         <p class="text-base md:text-lg text-gray-600 mb-2 leading-relaxed">Once you cancel, you'll immediately lose access to:</p>
+      </div>
+      <div class="max-w-2xl mx-auto mb-6 md:mb-8">
+         <div class="bg-red-50 rounded-xl p-4 md:p-6 border border-red-200">
+            <div class="space-y-3 md:space-y-4">
+               <div class="flex items-start gap-2 md:gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5 md:w-6 md:h-6 text-red-600 flex-shrink-0 mt-0.5">
+                     <path d="M18 6 6 18"></path>
+                     <path d="m6 6 12 12"></path>
+                  </svg>
+                  <div>
+                     <p class="text-sm md:text-base font-semibold text-gray-900">Your hiring website</p>
+                     <p class="text-xs md:text-sm text-gray-600">It will be taken offline immediately</p>
+                  </div>
+               </div>
+               <div class="flex items-start gap-2 md:gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5 md:w-6 md:h-6 text-red-600 flex-shrink-0 mt-0.5">
+                     <path d="M18 6 6 18"></path>
+                     <path d="m6 6 12 12"></path>
+                  </svg>
+                  <div>
+                     <p class="text-sm md:text-base font-semibold text-gray-900">All applicant data</p>
+                     <p class="text-xs md:text-sm text-gray-600">You won't be able to track or manage candidates</p>
+                  </div>
+               </div>
+               <div class="flex items-start gap-2 md:gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5 md:w-6 md:h-6 text-red-600 flex-shrink-0 mt-0.5">
+                     <path d="M18 6 6 18"></path>
+                     <path d="m6 6 12 12"></path>
+                  </svg>
+                  <div>
+                     <p class="text-sm md:text-base font-semibold text-gray-900">Team collaboration features</p>
+                     <p class="text-xs md:text-sm text-gray-600">Your team will lose access to all tools</p>
+                  </div>
+               </div>
+               <div class="flex items-start gap-2 md:gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5 md:w-6 md:h-6 text-red-600 flex-shrink-0 mt-0.5">
+                     <path d="M18 6 6 18"></path>
+                     <path d="m6 6 12 12"></path>
+                  </svg>
+                  <div>
+                     <p class="text-sm md:text-base font-semibold text-gray-900">Priority support</p>
+                     <p class="text-xs md:text-sm text-gray-600">No more dedicated help when you need it</p>
+                  </div>
+               </div>
+               <div class="flex items-start gap-2 md:gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5 md:w-6 md:h-6 text-red-600 flex-shrink-0 mt-0.5">
+                     <path d="M18 6 6 18"></path>
+                     <path d="m6 6 12 12"></path>
+                  </svg>
+                  <div>
+                     <p class="text-sm md:text-base font-semibold text-gray-900">All integrations</p>
+                     <p class="text-xs md:text-sm text-gray-600">Connected tools will stop working</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="max-w-2xl mx-auto mb-6 md:mb-8">
+         <div class="bg-green-50 rounded-xl p-4 md:p-6 border border-green-200">
+            <h3 class="text-base md:text-lg font-semibold text-gray-900 mb-3 md:mb-4 text-center">Stay and keep everything:</h3>
+            <div class="space-y-2 md:space-y-3">
+               <div class="flex items-center gap-2 md:gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle w-4 h-4 md:w-5 md:h-5 text-green-600 flex-shrink-0">
+                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                     <path d="m9 11 3 3L22 4"></path>
+                  </svg>
+                  <p class="text-xs md:text-sm text-gray-900">Unlimited job postings and applicant tracking</p>
+               </div>
+               <div class="flex items-center gap-2 md:gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle w-4 h-4 md:w-5 md:h-5 text-green-600 flex-shrink-0">
+                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                     <path d="m9 11 3 3L22 4"></path>
+                  </svg>
+                  <p class="text-xs md:text-sm text-gray-900">Customizable hiring website</p>
+               </div>
+               <div class="flex items-center gap-2 md:gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle w-4 h-4 md:w-5 md:h-5 text-green-600 flex-shrink-0">
+                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                     <path d="m9 11 3 3L22 4"></path>
+                  </svg>
+                  <p class="text-xs md:text-sm text-gray-900">Team collaboration tools</p>
+               </div>
+               <div class="flex items-center gap-2 md:gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle w-4 h-4 md:w-5 md:h-5 text-green-600 flex-shrink-0">
+                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                     <path d="m9 11 3 3L22 4"></path>
+                  </svg>
+                  <p class="text-xs md:text-sm text-gray-900">Priority customer support</p>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center max-w-2xl mx-auto">
+        <button (click)="closeDialog()" class="px-6 md:px-8 py-3 md:py-4 text-sm md:text-base font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors shadow-md hover:shadow-lg">Keep My Subscription</button>
+        <button (click)="cancelSubscription()" class="px-6 md:px-8 py-3 md:py-4 text-sm md:text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">Yes, Cancel Everything</button>
+    </div>
+   </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="md:container h-full lg:min-w-[1062px] w-full bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl  backdrop-blur-xl p-10">
+  <input type="hidden" name="application_id" value="31beef27-6beb-4bda-9ba6-c41ddf1861e3">
+
+  <div class="space-y-8">
+    <div>
+      <!-- <h2 class="text-2xl font-bold text-gray-900 mb-2 font-['Outfit-bold']">{{ 'JOB_APPLICATIONS.ADD_PHOTO_TITLE' | translate }}</h2>
+      <p class="text-gray-600 mb-8 font-['Outfit']">{{ 'JOB_APPLICATIONS.ADD_PHOTO_DESC' | translate }}</p> -->
+
+      <div class="flex flex-col items-center">
+        <!-- Clickable upload container -->
+        <div
+          class="cursor-pointer w-64 h-64 border-2 border-dashed border-gray-300 hover:border-gray-400 rounded-full flex flex-col items-center justify-center mb-6 overflow-hidden"
+          (click)="photoInput.click()"
+        >
+          <!-- Display uploaded image if exists -->
+          <img *ngIf="photoURL" [src]="photoURL" class="w-full h-full object-cover rounded-full" />
+
+          <!-- Show placeholder if no image -->
+          <ng-container *ngIf="!photoURL">
+            <svg class="w-12 h-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+            </svg>
+            <p class="text-gray-500 text-center">
+              <span class="font-medium font-['Outfit']">{{ 'JOB_APPLICATIONS.CLICK_TO_UPLOAD' | translate }}</span>
+            </p>
+          </ng-container>
+        </div>
+
+        <!-- Hidden file input -->
+        <input
+          type="file"
+          #photoInput
+          accept="image/*"
+          (change)="onPhotoSelected($event)"
+          class="hidden"
+        />
+      </div>
+    </div>
+
+    <!-- <div class="flex mt-8 pt-6 border-t border-gray-200 justify-end">
+      <button (click)="goToVideos()" class="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center font-['Outfit']">
+        {{ 'JOB_APPLICATIONS.CONTINUE' | translate }}
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+    </div> -->
+  </div>
+</div>

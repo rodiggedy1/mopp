@@ -1,0 +1,77 @@
+<div class="min-h-screen bg-gray-50">
+  <div class="flex h-screen bg-gray-50">
+    <app-sidebar></app-sidebar>
+    <div class="container mx-auto px-4 py-16 font">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl font-bold text-gray-900 mb-6">
+          {{ 'ACCOUNT.TITLE' | translate }}
+        </h1>
+        <p class="text-xl text-gray-600 mb-8">
+          {{ 'ACCOUNT.DESCRIPTION' | translate }}
+        </p>
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+          <div class="relative mb-4 flex items-center">
+            <h2 class="text-2xl font-semibold text-gray-900 mx-auto">
+              {{ 'ACCOUNT.CURRENT_SUBSCRIPTION' | translate }}
+            </h2>
+            <button *ngIf="user && user.email !== 'administrator@localhost'" (click)="manageBilling()" class="absolute right-0 px-4 py-2 text-green-600 border border-green-300 rounded-lg hover:bg-green-50 transition-colors text-sm">
+              {{'ACCOUNT.MANAGE_BILLING' | translate}}
+            </button>
+          </div>
+
+          <p class="text-gray-600 mb-6">
+            {{ getSubscriptionDescriptionKey(subscriptionStatus) | translate }}
+          </p>
+          <div class="border-t border-gray-200 pt-6">
+            <div class="flex items-center justify-between">
+              <div class="text-left">
+                <h3 class="font-semibold text-gray-900" *ngIf="subscriptionStatus === 'trialing'">
+                  {{ 'ACCOUNT.FREE_TRIAL' | translate }}
+                </h3>
+                <p class="text-sm text-gray-500" *ngIf="trialDetails">
+                  {{ trialDetails }}
+                </p>
+                <p class="text-xs text-green-600 mt-1">
+                  {{ 'ACCOUNT.ALL_FEATURES_INCLUDED' | translate }}
+                </p>
+              </div>
+              <!-- <button *ngIf="hasSubscription"
+              class="px-4 py-2 text-red-600 border border-red-300 rounded-lg hover:bg-red-50 transition-colors text-sm">
+              {{ 'ACCOUNT.END_TRIAL' | translate }}
+            </button> -->
+
+              <button *ngIf="!hasSubscription" (click)="subscribe()"
+                class="px-4 py-2 text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors text-sm">
+                {{ 'ACCOUNT.SUBSCRIBE' | translate }}
+              </button>
+              <button *ngIf="hasSubscription" (click)="cancelSubscription()"
+                class="px-4 py-2 text-red-600 border border-red-300 rounded-lg hover:bg-red-50 transition-colors text-sm">
+                {{ 'ACCOUNT.CANCEL_SUBSCRIPTION' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">
+            {{ 'ACCOUNT.NEED_HELP' | translate }}
+          </h3>
+          <p class="text-gray-700" [innerHTML]="'ACCOUNT.NEED_HELP_DESC' | translate"></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="onCloseAlert && onCloseAlert.message" class="mb-4 rounded-lg bg-green-100 bottom-[85px] border border-green-400 absolute right-[10px] text-green-700 px-4 py-3 flex justify-between items-center">
+  <span>{{ onCloseAlert.message }}</span>
+  <button type="button" class="px-4 py-3" (click)="closeCancelAlert()">
+    <svg class="fill-current h-6 w-6 text-red-500" role="button"
+         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+      <title>Close</title>
+      <path
+        d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652A1 1 0 105.652 7.066L8.586 10l-2.934 2.934a1 1 0 101.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z"/>
+    </svg>
+  </button>
+</div>

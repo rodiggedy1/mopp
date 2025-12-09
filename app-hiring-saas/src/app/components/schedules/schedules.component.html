@@ -1,0 +1,165 @@
+<div class="min-h-screen bg-gray-50">
+  <div class="flex h-screen bg-gray-50">
+    <app-sidebar></app-sidebar>
+    <div class="font flex-1 flex flex-col overflow-hidden lg:ml-0">
+      <header class="bg-white shadow-sm border-b border-gray-200 p-4 lg:px-6">
+        <div class="flex items-center justify-between">
+          <button class="lg:hidden text-gray-500 hover:text-gray-700">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-menu w-6 h-6">
+              <line x1="4" x2="20" y1="12" y2="12"></line>
+              <line x1="4" x2="20" y1="6" y2="6"></line>
+              <line x1="4" x2="20" y1="18" y2="18"></line>
+            </svg>
+          </button>
+          <div class="flex-1 lg:flex lg:items-center lg:justify-between">
+            <h6 class="text-lg font-semibold text-gray-900 ml-4 lg:ml-0">Schedules</h6>
+          </div>
+        </div>
+      </header>
+      <main class="relative flex-1 overflow-auto p-4 lg:p-6">
+
+      <div class="pt-24 bg-gray-50 flex items-center justify-center px-4" *ngIf="!calendlyAccessToken">
+        <div class="bg-white rounded-2xl shadow-md border border-gray-200 max-w-md w-full p-8 text-center">
+          <div class="flex flex-col items-center">
+            <div class="bg-blue-100 p-4 rounded-full mb-4">
+              <img src="../../../assets/images/calendly.svg" alt="Calendly" class="w-10 h-10" />
+            </div>
+
+            <h1 class="text-2xl font-semibold text-gray-800 font-[Poppins,sans-serif] mb-2">
+              Connect Your Calendly Account
+            </h1>
+
+            <p class="text-gray-600 text-sm font-[Montserrat,sans-serif] mb-6">
+              Link your Calendly profile to let customers schedule meetings directly with you.
+            </p>
+
+            <button
+              (click)="calendlyLogin()" 
+              class="flex items-center justify-center gap-2 h-[44px] w-full bg-white text-blue-600 border border-blue-500 rounded-lg hover:bg-blue-50 transition-colors font-[Poppins,sans-serif]"
+            >
+              <img class="w-5 h-5" src="../../../assets/images/calendly.svg" alt="Calendly" />
+              <span>Connect with Calendly</span>
+            </button>
+
+            <p class="text-xs text-gray-500 mt-4 font-[Montserrat,sans-serif]">
+              You’ll be securely redirected to Calendly to authorize your account.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="min-h-screen bg-gray-50 py-10 px-4" *ngIf="scheduledEvents && scheduledEvents.collection.length">
+        <div class="max-w-4xl mx-auto">
+          <!-- Page Header -->
+          <div class="text-center mb-10">
+            <h1 class="text-3xl font-bold text-gray-800">Your Scheduled Meetings</h1>
+            <p class="text-gray-500 mt-2">Here’s a list of your upcoming Calendly meetings.</p>
+          </div>
+
+          <!-- Meetings List -->
+          <div class="space-y-6">
+            <!-- Meeting Card -->
+            <div
+              *ngFor="let meeting of scheduledEvents.collection"
+              class="bg-white shadow-md rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition"
+            >
+              <div class="flex justify-between items-center mb-3">
+                <h2 class="text-xl font-semibold text-blue-600 flex items-center gap-2">
+                  <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" stroke-width="2"
+                      viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M8 7V3m8 4V3m-9 8h10m-11 9h12a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v11a2 2 0 002 2z" />
+                  </svg>
+                  {{ meeting.name }}
+                </h2>
+                <span
+                  class="text-sm px-3 py-1 rounded-full font-medium"
+                  [ngClass]="meeting.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-600'"
+                >
+                  {{ meeting.status | titlecase }}
+                </span>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-4 text-gray-700">
+                <div>
+                  <p class="text-sm text-gray-500">Start Time</p>
+                  <p class="font-medium">
+                    {{ meeting.start_time | date:'medium' }}
+                  </p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">End Time</p>
+                  <p class="font-medium">
+                    {{ meeting.end_time | date:'medium' }}
+                  </p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">Host</p>
+                  <p class="font-medium">
+                    {{ meeting.event_memberships[0]?.user_name }}
+                  </p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">Contact</p>
+                  <p class="font-medium">
+                    {{ meeting.location?.location || '—' }}
+                  </p>
+                </div>
+              </div>
+
+              <div class="mt-6 flex justify-between items-center">
+                <div class="text-sm text-gray-400">
+                  Created: {{ meeting.created_at | date:'short' }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty State -->
+          <div *ngIf="!scheduledEvents.collection.length" class="text-center mt-10">
+            <div class="bg-white border border-gray-200 rounded-2xl p-10 shadow-sm inline-block">
+              <svg class="w-12 h-12 mx-auto text-gray-400 mb-3" fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M8 7V3m8 4V3m-9 8h10m-11 9h12a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v11a2 2 0 002 2z" />
+              </svg>
+              <p class="text-gray-600 font-medium">No meetings scheduled yet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <mat-spinner *ngIf="isLoading" class="absolute z-10 left-[48%] top-[200px]" [diameter]="30"></mat-spinner>
+
+       <!-- <div class="p-4">
+        <div class="flex w-full justify-between items-center">
+          <div class="mr-4 w-[calc(100%-100px)]">
+            <label class="block text-sm font-medium">Enter your Calendly URL</label>
+            <input 
+              type="url" 
+              [disabled]="!showSaveBtn"
+              [(ngModel)]="inputUrl" 
+              placeholder="https://calendly.com/username"
+              class="border rounded px-3 py-2 w-full"
+            />
+          </div>
+          <button *ngIf="showSaveBtn"
+            (click)="saveUrl()" 
+            class="mt-4 h-[40px] bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 float-right w-[100px]"
+          >
+            Save
+          </button>
+
+          <button *ngIf="calendlyUrl && hasCalendlyUrl && !showSaveBtn" class="mt-4 h-[40px] w-[100px] bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 float-right" (click)="showSaveBtn = true; calendlyUrl = null">
+            Edit Url
+          </button>
+        </div>
+
+        <div *ngIf="calendlyUrl" id="calendly-embed" style="min-width:320px;height:700px;"></div>
+      </div> -->
+      </main>
+    </div>
+  </div>
+</div>

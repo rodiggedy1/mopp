@@ -1,0 +1,55 @@
+@use '@angular/material' as mat;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { 
+    height: 100%; 
+    margin: 0;
+    overflow-x: hidden;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@font-face {
+    font-family: 'Outfit';
+    src: url(./assets/fonts/outfit/Outfit-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'Outfit-bold';
+    src: url(./assets/fonts/outfit/Outfit-Bold.ttf);
+}
+
+@font-face {
+    font-family: 'Outfit-black';
+    src: url(./assets/fonts/outfit/Outfit-Black.ttf);
+}
+
+@font-face {
+    font-family: 'Outfit-medium';
+    src: url(./assets/fonts/outfit/Outfit-Medium.ttf);
+}
+
+@font-face {
+    font-family: 'Outfit-semibold';
+    src: url(./assets/fonts/outfit/Outfit-SemiBold.ttf);
+}
+
+.fs-16 {
+    font-size: 16px;
+}
+
+.cdk-drag-preview {
+  @apply shadow-lg rounded-lg bg-white;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
