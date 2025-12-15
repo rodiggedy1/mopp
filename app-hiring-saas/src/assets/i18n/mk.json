@@ -1,0 +1,46 @@
+{
+  "LANDING": {
+      "LANDING_MESSAGE": "Здраво, ова е шаблон Angular v20 кој ги вклучува основните елементи: Authentication, Interceptors, Guard, Translation"
+  },
+    "AUTH": {
+    "LOGIN": {
+      "TITLE": "Најавете се на вашиот профил",
+      "EMAIL": "Е-пошта",
+      "PASSWORD": "Лозинка",
+      "REMEMBER_ME": "Запомни ме",
+      "LOGIN_BUTTON": "Најави се",
+      "FORGOT_PASSWORD": "Ја заборавивте лозинката?",
+      "SIGNUP": "Регистрирај се",
+      "SHOW": "Прикажи",
+      "ERRORS": {
+        "REQUIRED": "{{field}} е задолжително",
+        "EMAIL": "Ве молиме внесете валидна е-пошта",
+        "MIN_LENGTH": "{{field}} мора да има најмалку {{min}} карактери",
+        "MAX_LENGTH": "{{field}} не смее да има повеќе од {{max}} карактери",
+        "INVALID_CREDENTIALS": "Неточна е-пошта или лозинка. Обидете се повторно.",
+        "TOO_MANY_ATTEMPTS": "Премногу обиди за најава. Обидете се подоцна.",
+        "SERVER_ERROR": "Не може да се поврзе со серверот. Проверете ја интернет конекцијата."
+      }
+    },
+      "VALIDATION": {
+      "REQUIRED": "{{field}} е задолжително",
+      "EMAIL": "Ве молиме внесете валидна е-пошта",
+      "MIN_LENGTH": "{{field}} мора да има најмалку {{min}} карактери",
+      "MAX_LENGTH": "{{field}} не смее да има повеќе од {{max}} карактери",
+      "PATTERN": "{{field}} содржи недозволени карактери",
+      "PASSWORD_MISMATCH": "Лозинките не се совпаѓаат",
+      "PASSWORD_STRENGTH": "Лозинката мора да содржи {{rules}}"
+    },
+    "PASSWORD_RULES": {
+      "NUMBER": "еден број",
+      "UPPER": "еден голем буква",
+      "LOWER": "еден мал буква",
+      "SPECIAL": "еден специјален карактер",
+      "MIN_LENGTH": "најмалку 8 карактери"
+    }
+  },
+  "SHARED": {
+    "ENGLISH": "Англиски",
+    "MACEDONIAN": "Македонски"
+  }
+}

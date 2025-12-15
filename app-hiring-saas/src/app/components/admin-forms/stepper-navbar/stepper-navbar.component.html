@@ -1,0 +1,82 @@
+<button (click)="backToForms()" class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors">
+  <svg _ngcontent-ng-c2996430577="" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-4 h-4">
+    <path _ngcontent-ng-c2996430577="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+  </svg> Back to Job Forms 
+</button>
+
+<div cdkDropList (cdkDropListDropped)="drop($event)" class="flex flex-col mt-5">
+  <div *ngFor="let step of _applyJobStepperStatusService.addedSteps; let i = index" cdkDrag
+    (click)="selectStep(i)"
+    [ngClass]="{
+      'bg-blue-50 text-blue-600': i == _applyJobStepperStatusService.activeStep
+    }"
+    class="flex items-center justify-between cursor-pointer gap-3 px-4 py-3 rounded-xl transition-colors mb-2 flex-1 hover:bg-gray-50 group"
+  >
+    <!-- Left side (icon + name) -->
+    <div class="flex items-center gap-3">
+      <div class="flex items-center justify-center w-8 h-8 rounded-full shrink-0">
+        <div [innerHTML]="step.icon" class="cursor-move" cdkDragHandle></div>
+      </div>
+      <span class="font-medium font-['Outfit-medium'] cursor-move" cdkDragHandle>{{ step.name }}</span>
+    </div>
+
+    <div class="hidden group-hover:flex items-center gap-2">
+      <button
+        (click)="editStep(i, $event)"
+        class="text-gray-500 hover:text-blue-600"
+        title="Edit"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652l-10.5 10.5a4.5 4.5 0 01-1.897 1.13l-3.741.935a.75.75 0 01-.925-.925l.935-3.741a4.5 4.5 0 011.13-1.897l10.5-10.5z" />
+        </svg>
+      </button>
+      <button
+        *ngIf="i > 0"
+        (click)="removeStep(i, $event)"
+        class="text-gray-500 hover:text-red-600"
+        title="Remove"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add Step Button -->
+<div
+  (click)="openAddStepDialog()"
+  class="justify-start w-full cursor-pointer mt-8 bg-blue-500 hover:bg-blue-100 text-blue-100 hover:text-blue-700 py-2 px-4 rounded-lg font-medium transition-colors inline-flex items-center"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+    viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round"
+    class="lucide lucide-plus w-4 h-4 mr-2">
+    <line x1="12" y1="5" x2="12" y2="19"></line>
+    <line x1="5" y1="12" x2="19" y2="12"></line>
+  </svg>
+  Add Step
+</div>
+
+<div
+  (click)="saveStepper()"
+  class="justify-start w-full cursor-pointer mt-3 bg-green-500 hover:bg-green-100 text-green-100 hover:text-green-700 py-2 px-4 rounded-lg font-medium transition-colors inline-flex items-center"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+    viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round"
+    class="lucide lucide-save w-4 h-4 mr-2">
+    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+    <polyline points="17 21 17 13 7 13 7 21"/>
+    <polyline points="7 3 7 8 15 8"/>
+  </svg>
+  Save Stepper
+</div>

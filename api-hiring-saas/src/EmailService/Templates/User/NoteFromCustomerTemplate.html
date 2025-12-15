@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@type Notification</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #007bff;
+            color: white;
+        }
+
+        .content {
+            padding: 25px 30px;
+            color: #333333;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .content h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+
+        .message-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            white-space: pre-wrap;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #999999;
+            padding: 15px;
+            background-color: #fafafa;
+            border-top: 1px solid #eeeeee;
+        }
+
+        .profile-info {
+            font-size: 14px;
+            color: #555555;
+            margin-top: 20px;
+        }
+
+        .profile-info span {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>@type</h2>
+        </div>
+        <div class="content">
+            <p>Hello,</p>
+            <p>You have received a new <strong>@type</strong> from a customer.</p>
+
+            <div class="message-box">
+                @message
+            </div>
+
+            <div class="profile-info">
+                <strong>Submitted by:</strong>
+                <span>@firstName</span>
+                <span>@email</span>
+            </div>
+        </div>
+        <div class="footer">
+            © 2025 Mopp Hiring — All rights reserved.
+        </div>
+    </div>
+</body>
+</html>

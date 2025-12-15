@@ -1,0 +1,165 @@
+version: '3.8'
+
+volumes:
+  staging_saas_media_data:
+  staging_saas_documents_data:
+  staging_saas_kibana_config:
+  staging_saas_elasticsearch_data:
+  staging_postgres_data:
+
+networks:
+  traefik-public:
+    external: true
+  staging-internal:
+    driver: bridge
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: saas_postgres_staging
+    hostname: saas_postgres_staging
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=passw123
+      - POSTGRES_DB=saas_staging
+    volumes:
+      - staging_postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    networks:
+      - staging-internal
+
+  rabbitmq:
+    image: rabbitmq:3.11-management 
+    container_name: saas_rabbitmq_staging
+    hostname: saas-rabbitmq-staging-host
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=passw123
+      - RABBITMQ_DEFAULT_VHOST=/
+      - RABBITMQ_NODE_PORT=5674
+    volumes:
+      - /docker_conf/rabbitmq/staging/data/:/var/lib/rabbitmq/
+    networks:
+      - staging-internal
+
+  redis:
+    container_name: saas_redis_staging
+    image: "redis:latest"
+    restart: always
+    networks:
+      - staging-internal
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: saas_elasticsearch_staging
+    restart: always
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "ELASTIC_PASSWORD=changeme"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - staging_saas_elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - staging-internal
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.0
+    container_name: saas_kibana_staging
+    restart: always
+    ports:
+      - 5606:5601
+    depends_on:
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_HOSTS=http://saas_elasticsearch_staging:9200
+    volumes:
+      - staging_saas_kibana_config:/usr/share/kibana/config
+    networks:
+      - staging-internal
+
+  api:
+    image: saas/api-staging
+    container_name: saas_api_staging
+    hostname: api-staging
+    restart: always
+    build:
+      context: .
+      dockerfile: src/Api/Dockerfile
+    depends_on:
+      - postgres
+      - rabbitmq
+      - elasticsearch
+      - redis
+    volumes:
+      - staging_saas_media_data:/app/media
+      - staging_saas_documents_data:/app/documents
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Staging
+    networks:
+      - traefik-public
+      - staging-internal
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api-staging.rule=Host(`api.staging.mopphiring.com`)"
+      - "traefik.http.routers.api-staging.entrypoints=websecure"
+      - "traefik.http.routers.api-staging.tls.certresolver=letsencrypt"
+      - "traefik.http.services.api-staging.loadbalancer.server.port=8080"
+      - "traefik.docker.network=traefik-public"
+
+  emailservice:
+    image: saas/emailservice-staging
+    container_name: saas_emailservice_staging
+    restart: always
+    build:
+      context: .
+      dockerfile: src/EmailService/Dockerfile
+    depends_on:
+      - rabbitmq
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Staging
+    networks:
+      - staging-internal
+
+  worker:
+    image: saas/worker-staging
+    container_name: saas_worker_staging
+    restart: always
+    build:
+      context: .
+      dockerfile: src/Worker/Dockerfile
+    depends_on:
+      - postgres
+      - rabbitmq
+      - elasticsearch
+      - redis
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Staging
+    networks:
+      - staging-internal
+
+  notificationservice:
+    image: saas/notificationservice-staging
+    container_name: saas_notificationservice_staging
+    hostname: notificationservice-staging
+    restart: always
+    build:
+      context: .
+      dockerfile: src/NotificationService/Dockerfile
+    depends_on:
+      - postgres
+      - rabbitmq
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Staging
+    networks:
+      - staging-internal

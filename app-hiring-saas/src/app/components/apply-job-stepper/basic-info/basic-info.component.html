@@ -1,0 +1,219 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="submitForm()"
+  class="md:container lg:min-w-[1062px] h-full w-full bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl shadow-lg border border-gray-200/50 backdrop-blur-xl p-10"
+>
+  <input type="hidden" name="application_id" value="2d4572e6-826c-4b85-81ed-0d55d2a785f2" />
+  <div class="space-y-8">
+    <div>
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 font-['Outfit-bold']">
+        {{ 'JOB_APPLICATIONS.TITLE' | translate }}
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- First Name -->
+        <div class="relative">
+          <label class="block text-sm font-medium text-gray-700 mb-2 font-['Outfit-medium']">
+            {{ 'JOB_APPLICATIONS.FIRST_NAME' | translate }}
+          </label>
+          <input
+            type="text"
+            formControlName="firstName"
+            placeholder="{{ 'JOB_APPLICATIONS.FIRST_NAME_PLACEHOLDER' | translate }}"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+          <p *ngIf="f['firstName'].touched && f['firstName'].invalid" class="absolute text-red-500 text-sm font-['Outfit'] mt-1">
+            {{ 'JOB_APPLICATIONS.FIRST_NAME_REQUIRED' | translate }}
+          </p>
+        </div>
+
+        <!-- Last Name -->
+        <div class="relative">
+          <label class="block text-sm font-medium text-gray-700 mb-2 font-['Outfit-medium']">
+            {{ 'JOB_APPLICATIONS.LAST_NAME' | translate }}
+          </label>
+          <input
+            type="text"
+            formControlName="lastName"
+            placeholder="{{ 'JOB_APPLICATIONS.LAST_NAME_PLACEHOLDER' | translate }}"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+          <p *ngIf="f['lastName'].touched && f['lastName'].invalid" class="absolute text-red-500 text-sm mt-1">
+            {{ 'JOB_APPLICATIONS.LAST_NAME_REQUIRED' | translate }}
+          </p>
+        </div>
+
+        <!-- Email -->
+        <div class="relative">
+          <label class="block text-sm font-medium text-gray-700 mb-2 font-['Outfit-medium']">
+            {{ 'JOB_APPLICATIONS.EMAIL' | translate }}
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <!-- Icon -->
+              <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                />
+              </svg>
+            </div>
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="{{ 'JOB_APPLICATIONS.EMAIL_PLACEHOLDER' | translate }}"
+              class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+          <p *ngIf="f['email'].touched && f['email'].errors?.['required']" class="absolute text-red-500 text-sm mt-1">
+            {{ 'JOB_APPLICATIONS.EMAIL_REQUIRED' | translate }}
+          </p>
+          <p *ngIf="f['email'].touched && f['email'].errors?.['email']" class="absolute text-red-500 text-sm mt-1">
+            {{ 'JOB_APPLICATIONS.EMAIL_INVALID' | translate }}
+          </p>
+        </div>
+
+        <!-- Phone -->
+        <div class="relative">
+          <label class="block text-sm font-medium text-gray-700 mb-2 font-['Outfit-medium']">
+            {{ 'JOB_APPLICATIONS.PHONE' | translate }}
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <!-- Icon -->
+              <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                />
+              </svg>
+            </div>
+            <input
+              (input)="formatPhone($event)"
+              type="tel"
+              formControlName="phone"
+              placeholder="{{ 'JOB_APPLICATIONS.PHONE_PLACEHOLDER' | translate }}"
+              maxlength="12"
+              class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+          <p *ngIf="f['phone'].touched && f['phone'].errors?.['required']" class="absolute text-red-500 text-sm mt-1">
+            {{ 'JOB_APPLICATIONS.PHONE_REQUIRED' | translate }}
+          </p>
+          <p *ngIf="f['phone'].touched && f['phone'].errors?.['pattern']" class="absolute text-red-500 text-sm mt-1">
+            {{ 'JOB_APPLICATIONS.PHONE_INVALID' | translate }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Address -->
+      <div class="mt-8">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4 font-['Outfit-medium']">
+          {{ 'JOB_APPLICATIONS.ADDRESS' | translate }}
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <!-- Street Address -->
+          <div class="md:col-span-3 relative">
+            <label class="block text-sm font-medium text-gray-700 mb-2 font-['Outfit-medium']">
+              {{ 'JOB_APPLICATIONS.STREET_ADDRESS' | translate }}
+            </label>
+            <div class="relative">
+              <input
+                type="text"
+                formControlName="streetAddress"
+                placeholder="{{ 'JOB_APPLICATIONS.STREET_PLACEHOLDER' | translate }}"
+                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            <p *ngIf="f['streetAddress'].touched && f['streetAddress'].invalid" class="absolute text-red-500 text-sm mt-1">
+              {{ 'JOB_APPLICATIONS.STREET_REQUIRED' | translate }}
+            </p>
+          </div>
+
+          <!-- Apt/Suite -->
+          <div class="relative">
+            <label class="block text-sm font-medium text-gray-700 mb-2 font-['Outfit-medium']">
+              {{ 'JOB_APPLICATIONS.APT_SUITE' | translate }}
+            </label>
+            <input
+              type="text"
+              formControlName="aptSuite"
+              placeholder="{{ 'JOB_APPLICATIONS.APT_PLACEHOLDER' | translate }}"
+              class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+          <!-- City -->
+          <div class="relative">
+            <label class="block text-sm font-medium text-gray-700 mb-2 font-['Outfit-medium']">
+              {{ 'JOB_APPLICATIONS.CITY' | translate }}
+            </label>
+            <input
+              type="text"
+              formControlName="city"
+              placeholder="{{ 'JOB_APPLICATIONS.CITY_PLACEHOLDER' | translate }}"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+            <p *ngIf="f['city'].touched && f['city'].invalid" class="absolute text-red-500 text-sm mt-1">
+              {{ 'JOB_APPLICATIONS.CITY_REQUIRED' | translate }}
+            </p>
+          </div>
+
+          <!-- State -->
+          <div class="relative">
+            <label class="block text-sm font-medium text-gray-700 mb-2 font-['Outfit-medium']">
+              {{ 'JOB_APPLICATIONS.STATE' | translate }}
+            </label>
+            <select
+              formControlName="state"
+              class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
+            >
+              <option value="">{{ 'JOB_APPLICATIONS.STATE_PLACEHOLDER' | translate }}</option>
+              <option value="AL">Alabama</option>
+              <option value="AK">Alaska</option>
+              <option value="AZ">Arizona</option>
+            </select>
+            <p *ngIf="f['state'].touched && f['state'].invalid" class="absolute text-red-500 text-sm mt-1">
+              {{ 'JOB_APPLICATIONS.STATE_REQUIRED' | translate }}
+            </p>
+          </div>
+
+          <!-- ZIP -->
+          <div class="relative">
+            <label class="block text-sm font-medium text-gray-700 mb-2 font-['Outfit-medium']">
+              {{ 'JOB_APPLICATIONS.ZIP' | translate }}
+            </label>
+            <input
+              type="text"
+              formControlName="zip"
+              placeholder="{{ 'JOB_APPLICATIONS.ZIP_PLACEHOLDER' | translate }}"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+            <p *ngIf="f['zip'].touched && f['zip'].invalid" class="absolute text-red-500 text-sm mt-1">
+              {{ 'JOB_APPLICATIONS.ZIP_REQUIRED' | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="flex mt-8 pt-6 border-t border-gray-200 justify-end">
+      <button
+        (click)="goToRequirements()"
+        type="submit"
+        class="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center font-['Outfit-medium']"
+      >
+        {{ 'JOB_APPLICATIONS.CONTINUE' | translate }}
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</form>
