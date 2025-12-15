@@ -37,6 +37,7 @@ export const httpHeaderInterceptor: HttpInterceptorFn = (req, next) => {
     { url: 'User/reset-password', methods: ['POST'] },
     { url: 'users/me', methods: ['GET'] },
     { url: 'scheduled_events', methods: ['GET'] },
+    { url: 'calendly.com/oauth/token', methods: ['POST'] },
   ];
 
   const isExcluded = excludeUrls.some(e => req.url.endsWith(e.url) && e.methods.includes(req.method));

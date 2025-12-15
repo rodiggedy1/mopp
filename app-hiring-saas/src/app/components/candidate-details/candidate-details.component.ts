@@ -184,4 +184,41 @@ export class CandidateDetailsComponent implements OnInit{
     return section.jobApplicationSectionProperties
       .filter((p: any, index: number) => index < 4 && (p.stringValue === 'Yes' || p.stringValue === 'No'));
   }
+
+  getDynamicSections() {
+    if (!this.applicant?.jobApplicationSections) {
+      return [];
+    }
+
+    // Filter out sections that are already displayed
+    return this.applicant.jobApplicationSections.filter((section: any, index: number) => {
+      // Skip the first section (index 0) which is shown in "Requirements Check"
+      if (index === 0) return false;
+      
+      // Skip sections that contain "tags" type properties (shown in "Experience & Skills")
+      const hasTagsProperty = section.jobApplicationSectionProperties?.some(
+        (prop: any) => prop.type === 'tags'
+      );
+      
+      // Skip sections that are empty or have no properties with values
+      const hasValues = section.jobApplicationSectionProperties?.some(
+        (prop: any) => prop.stringValue || prop.integerValue !== null || 
+                     prop.dateTimeValue !== null || prop.booleanValue !== null
+      );
+      
+      return !hasTagsProperty && hasValues;
+    });
+  }
+
+  // Helper method to check if a checkbox option is selected
+  isOptionSelected(selectedValues: string, option: string): boolean {
+    if (!selectedValues) return false;
+    return selectedValues.includes(option);
+  }
+
+  // Helper method to parse tags string into array
+  getTagsArray(tagsString: string): string[] {
+    if (!tagsString) return [];
+    return tagsString.split(',').map(tag => tag.trim());
+  }
 }

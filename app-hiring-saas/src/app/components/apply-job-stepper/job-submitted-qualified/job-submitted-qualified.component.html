@@ -36,7 +36,9 @@
       <p class="text-xl md:text-2xl text-gray-700 font-medium mb-3">{{'VALUES.PROFILE_MATCH' | translate}}</p>
       <p class="text-lg text-gray-600 mb-8">{{'VALUES.IMPRESSED_APPLICATION' | translate}}</p>
       <div class="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mb-8"></div>
-      <button *ngIf="calendlyProfileUrl" (click)="openCalendlyPopup()" class="group relative w-full md:w-auto inline-flex items-center justify-center gap-3 px-12 py-5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-xl font-semibold rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 mb-8">
+      <button *ngIf="calendlyProfileUrl || externalCalendarUrl"
+        (click)="handleCalendarClick()"
+        class="group relative w-full md:w-auto inline-flex items-center justify-center gap-3 px-12 py-5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-xl font-semibold rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 mb-8">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"  stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-6 h-6">
           <path d="M8 2v4"></path>
           <path d="M16 2v4"></path>

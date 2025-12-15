@@ -3,7 +3,7 @@ import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { SafeHtml } from '@angular/platform-browser';
-import { FormField, JobResponse, JobStepperRequest, JobStepperResponse } from '../../models/job-stepper.model';
+import { JobResponse, JobStepperRequest, JobStepperResponse } from '../../models/job-stepper.model';
 import { JobApplicationSearchRequest } from '../../models/applicant.model';
 
 @Injectable({
@@ -25,11 +25,13 @@ export class ApplyJobStepperStatusService {
   public jobSteps: {isSelected: boolean, isActive: boolean, isValid: boolean, isDefault: boolean}[] = [];
   public activeJobStep: number = 0;
   public calendlyUrl: string | null = null;
-  
+  public externalCalendarUrl: string | null = null;
+
   selectedJob!: JobResponse | undefined;
-  
+
   constructor(
-    private http: HttpClient) {
+    private http: HttpClient,
+  ) {
   }
 
   // Basic Info

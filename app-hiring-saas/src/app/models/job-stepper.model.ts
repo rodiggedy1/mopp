@@ -14,7 +14,7 @@ export interface FormField {
     pattern?: string;
   };
 }
-  
+
 export interface FormTemplate {
   id: string;
   name: string;
@@ -60,6 +60,7 @@ export interface JobCreator {
   lastName: string;
   picture: string | null;
   calendlyProfileUrl : string | null;
+  externalCalendarUrl: string | null;
 }
 
 export interface jobForm {

@@ -72,6 +72,7 @@ export class ApplyJobStepperComponent implements OnInit {
         .subscribe(data => {
           this.selectedJob = data;
           this._applyJobStepperStatusService.calendlyUrl = data.creator?.calendlyProfileUrl || '';
+          this._applyJobStepperStatusService.externalCalendarUrl = data.creator?.externalCalendarUrl || '';
           this._applyJobStepperStatusService.selectedJob = this.selectedJob;
           this.selectedJob?.jobForm?.jobFormSections.forEach(el => {
             el.icon = this.sanitizer.bypassSecurityTrustHtml(
@@ -350,10 +351,10 @@ export class ApplyJobStepperComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.isLoading = false;
-          
+
           // Check if user qualifies for interview
           const qualifiesForInterview = this.checkInterviewQualification();
-          
+
           if (qualifiesForInterview) {
             this.router.navigate(['../job-submitted-qualified']);
           } else {
@@ -423,7 +424,7 @@ export class ApplyJobStepperComponent implements OnInit {
         }
 
         // Check if any selected value matches interviewRequired values
-        const hasQualifyingValue = selectedValues.some(selectedValue => 
+        const hasQualifyingValue = selectedValues.some(selectedValue =>
           field.interviewRequired.includes(selectedValue)
         );
 

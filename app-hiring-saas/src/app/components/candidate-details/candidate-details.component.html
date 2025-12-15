@@ -175,6 +175,111 @@
           </div>
         </div>
 
+<!-- Dynamic Additional Sections -->
+<div class="bg-white rounded-xl border border-gray-200 shadow-sm" *ngIf="getDynamicSections().length > 0">
+  <div class="p-6 border-b border-gray-200">
+    <h2 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      {{'CANDIDATES.ADDITIONAL_INFORMATION' | translate}}
+    </h2>
+  </div>
+  <div class="p-6 space-y-6">
+    <ng-container *ngFor="let section of getDynamicSections(); let last = last">
+      <div class="space-y-4">
+        <h3 class="text-md font-semibold text-gray-900">{{section.name}}</h3>
+        <p class="text-sm text-gray-600" *ngIf="section.description">{{section.description}}</p>
+        
+        <div class="space-y-3">
+          <ng-container *ngFor="let property of section.jobApplicationSectionProperties">
+            <div *ngIf="property.stringValue || property.integerValue || property.dateTimeValue || property.booleanValue !== null">
+              <h4 class="text-sm font-medium text-gray-900 mb-1">{{property.label}}</h4>
+              
+              <!-- Render based on property type -->
+              <div *ngIf="property.type === 'checkbox' && property.stringValue">
+                <div class="space-y-1">
+                  <div *ngFor="let option of property.options" class="flex items-center gap-2">
+                    <svg *ngIf="isOptionSelected(property.stringValue, option)" class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <svg *ngIf="!isOptionSelected(property.stringValue, option)" class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    <span class="text-sm text-gray-700">{{option}}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div *ngIf="property.type === 'select' && property.stringValue">
+                <p class="text-sm text-gray-600">{{property.stringValue}}</p>
+              </div>
+              
+              <div *ngIf="property.type === 'textarea' && property.stringValue">
+                <p class="text-sm text-gray-600 whitespace-pre-line">{{property.stringValue}}</p>
+              </div>
+              
+              <div *ngIf="property.type === 'phone' && property.stringValue">
+                <p class="text-sm text-gray-600">{{property.stringValue}}</p>
+              </div>
+              
+              <div *ngIf="property.type === 'radio' && property.stringValue">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                      [ngClass]="{
+                        'bg-green-100 text-green-800': property.stringValue === 'Yes',
+                        'bg-red-100 text-red-800': property.stringValue === 'No',
+                        'bg-gray-100 text-gray-800': property.stringValue !== 'Yes' && property.stringValue !== 'No'
+                      }">
+                  {{property.stringValue}}
+                </span>
+              </div>
+              
+              <div *ngIf="property.type === 'about-textarea' && property.stringValue">
+                <p class="text-sm text-gray-600">{{property.stringValue}}</p>
+              </div>
+              
+              <div *ngIf="property.type === 'tags' && property.stringValue">
+                <div class="flex flex-wrap gap-2">
+                  <span *ngFor="let tag of getTagsArray(property.stringValue)" 
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                    {{tag}}
+                  </span>
+                </div>
+              </div>
+              
+              <div *ngIf="['file', 'video'].includes(property.type) && !property.stringValue">
+                <p class="text-sm text-gray-400 italic">{{'CANDIDATES.NO_FILE_UPLOADED' | translate}}</p>
+              </div>
+              
+              <div *ngIf="property.type === 'file' && property.stringValue">
+                <a [href]="property.stringValue" target="_blank" 
+                   class="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-700 hover:underline">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path>
+                  </svg>
+                  {{'CANDIDATES.DOWNLOAD_FILE' | translate}}
+                </a>
+              </div>
+              
+              <div *ngIf="property.type === 'video' && property.stringValue">
+                <div class="relative">
+                  <video [src]="property.stringValue" controls class="w-full rounded-lg"></video>
+                </div>
+              </div>
+            </div>
+            
+            <div *ngIf="!property.stringValue && property.integerValue === null && property.dateTimeValue === null && property.booleanValue === null" 
+                 class="text-sm text-gray-400 italic">
+              {{'CANDIDATES.NO_RESPONSE' | translate}}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="border-t border-gray-200" *ngIf="!last"></div>
+    </ng-container>
+  </div>
+</div>
+
         <div class="bg-white rounded-xl border border-gray-200 shadow-sm">
           <div class="p-6 border-b border-gray-200">
             <h2 class="text-lg font-semibold text-gray-900 flex items-center gap-2">

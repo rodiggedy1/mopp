@@ -212,6 +212,7 @@
     },
     "CANDIDATES": {
       "MANAGE_AND_REVIEW_JOB_APPLICATIONS": "Manage and review job applications",
+      "ADDITIONAL_INFORMATION": "Additional Information",
       "SEARCH_CANDIDATES": "Search candidates...",
       "ALL_CANDIDATES": "All candidates",
       "APPLIED": "Applied",
@@ -340,5 +341,16 @@
       "FIND_QUALIFIED": "Find qualified cleaning staff with video applications in minutes, not months",
       "JOIN_HUNDREDS": "Join hundreds of cleaning businesses already hiring smarter",
       "PROCESSING": "Processing..."
+    },
+    "SCHEDULES" : {
+      "SCHEDULES": "Schedules",
+      "CONNECT_YOUR_CALENDLY_ACCOUNT": "Connect Your Calendly Account",
+      "LINK_YOUR_CALENDLY_PROFILE": "Link your Calendly profile to let customers schedule meetings directly with you.",
+      "CONNECT_WITH_CALENDLY": "Connect with Calendly",
+      "SECURELY_REDIRECTED": "You’ll be securely redirected to Calendly to authorize your account.",
+      "OR": "OR",
+      "ENTER_YOUR_CALENDAR": "Enter your Google Calendar, Outlook Calendar, or another external calendar URL.",
+      "ADD_YOUR_CALENDAR_URL": "Add your calendar URL",
+      "SUCCESSFULLY_ADDED": "Your external calendar URL has been successfully added."
     }
 }

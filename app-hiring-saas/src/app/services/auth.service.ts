@@ -383,4 +383,13 @@ export class AuthService {
     );
   }
 
+  saveExternalCalendarUrl(url: string): Observable<any> {
+    return this.http.put<any>(
+      `${this.API_URL}User/external-calendar-url?externalCalendarUrl=${encodeURIComponent(url)}`,
+      null
+    ).pipe(
+      catchError((err) => throwError(() => err))
+    );
+  }
+
 }

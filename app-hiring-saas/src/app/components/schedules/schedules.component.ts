@@ -6,10 +6,11 @@ import { User } from '../../models/auth.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CalendlyUserCredentials } from '../../models/job-stepper.model';
 import { environment } from '../../../environments/environment';
+import { TranslateModule } from '@ngx-translate/core';
 declare const Calendly: any;
 
 interface CalendlyTokenResponse {
@@ -65,7 +66,7 @@ interface ScheduledEvent {
 
 @Component({
   selector: 'app-schedules',
-  imports: [SidebarComponent, CommonModule, FormsModule, MatProgressSpinnerModule],
+  imports: [SidebarComponent, CommonModule, FormsModule, MatProgressSpinnerModule, TranslateModule],
   templateUrl: './schedules.component.html',
   styleUrl: './schedules.component.scss'
 })
@@ -91,11 +92,16 @@ export class SchedulesComponent implements OnInit, AfterViewInit, OnDestroy {
   errorMessage: string = '';
   scheduledEvents: any = null;
 
+  externalCalendarUrl: string = "";
+  isSavingExternalUrl: boolean = false;
+  externalUrlSaved: boolean = false;
+
   private destroy$ = new Subject<void>();
 
   constructor(
     private _authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -115,12 +121,14 @@ export class SchedulesComponent implements OnInit, AfterViewInit, OnDestroy {
         if (data && data.calendlyDetails) {
           this.activeUser = data;
 
-          this.calendlyAccessToken = data.calendlyDetails.accessToken;
-          this.calendlyRefreshToken = data.calendlyDetails.refreshToken;
-          this.calendlyExpiresAt = data.calendlyDetails.tokenExpiresAt ? Number(data.calendlyDetails.tokenExpiresAt) : null;
-          this.tokenType = "Bearer";
+          if (data.calendlyDetails.accessToken) {
+            this.calendlyAccessToken = data.calendlyDetails.accessToken;
+            this.calendlyRefreshToken = data.calendlyDetails.refreshToken;
+            this.calendlyExpiresAt = data.calendlyDetails.tokenExpiresAt ? Number(data.calendlyDetails.tokenExpiresAt) : null;
+            this.tokenType = "Bearer";
 
-          this.tryLoadCalendlySession();
+            this.tryLoadCalendlySession();
+          }
         }
       });
   }
@@ -163,6 +171,10 @@ export class SchedulesComponent implements OnInit, AfterViewInit, OnDestroy {
           this.calendlyAccessToken = data.access_token;
           this.calendlyRefreshToken = data.refresh_token || null;
           this.calendlyExpiresAt = Date.now() + (data.expires_in || 3600) * 1000;
+          this.router.navigate([], {
+            queryParams: {},
+            replaceUrl: true
+          });
 
           this.saveCalendlyCredentials(data, code);
           this.getCalendlyPublicUrl();
@@ -176,7 +188,6 @@ export class SchedulesComponent implements OnInit, AfterViewInit, OnDestroy {
   // --------------------------------------------
   tryLoadCalendlySession() {
     if (!this.calendlyRefreshToken || !this.calendlyExpiresAt || !this.calendlyAccessToken) {
-      console.log("No Calendly credentials – user must connect.");
       this.isLoading = false;
       return;
     }
@@ -184,11 +195,8 @@ export class SchedulesComponent implements OnInit, AfterViewInit, OnDestroy {
     const now = Date.now();
 
     if (now < this.calendlyExpiresAt) {
-      // ✅ Access token still valid
       this.getCalendlyPublicUrl();
     } else {
-      // ✅ Refresh token required
-      console.log("Token expired — refreshing...");
       this.refreshAccessToken(this.calendlyRefreshToken);
     }
   }
@@ -197,7 +205,6 @@ export class SchedulesComponent implements OnInit, AfterViewInit, OnDestroy {
   // ✅ 3. Refresh Calendly Access Token
   // --------------------------------------------
   refreshAccessToken(refreshToken: string) {
-
     const url = 'https://auth.calendly.com/oauth/token';
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -224,7 +231,9 @@ export class SchedulesComponent implements OnInit, AfterViewInit, OnDestroy {
 
           this.getCalendlyPublicUrl();
         },
-        error: err => console.error(err)
+        error: err => console.error((err: any) => {
+          console.error("Error refreshing token:", err);
+        })
       });
   }
 
@@ -248,7 +257,15 @@ export class SchedulesComponent implements OnInit, AfterViewInit, OnDestroy {
     this._authService.saveCalendlyCredentials(credentials)
       .pipe(take(1))
       .subscribe({
-        next: () => console.log("Calendly credentials saved to DB"),
+        next: () => {
+          this.calendlyAccessToken = data.access_token;
+          this.calendlyRefreshToken = data.refresh_token ?? this.calendlyRefreshToken;
+          this.calendlyExpiresAt = data.expires_in ? (Date.now() + data.expires_in * 1000) : this.calendlyExpiresAt;
+          this.tokenType = "Bearer";
+          this._authService.getUserData().pipe(take(1)).subscribe(user => {
+          this.tryLoadCalendlySession();
+          });
+        },
         error: err => console.error("Error saving Calendly credentials:", err)
       });
   }
@@ -257,7 +274,6 @@ export class SchedulesComponent implements OnInit, AfterViewInit, OnDestroy {
   // ✅ 5. Get Calendly User Info
   // --------------------------------------------
   getCalendlyPublicUrl(): void {
-
     const headers = new HttpHeaders({
       'Authorization': `${this.tokenType} ${this.calendlyAccessToken}`,
       'Content-Type': 'application/json',
@@ -337,6 +353,33 @@ export class SchedulesComponent implements OnInit, AfterViewInit, OnDestroy {
       `https://auth.calendly.com/oauth/authorize?client_id=${environment.calendlyClientId}&response_type=code&redirect_uri=${environment.calendlyRedirectUri}`,
       '_blank'
     );
+  }
+
+  saveExternalCalendarUrl(url: string) {
+    if (!url) return;
+
+    this.isSavingExternalUrl = true;
+    this.externalUrlSaved = false;
+
+    this._authService.saveExternalCalendarUrl(url)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.isSavingExternalUrl = false;
+          this.externalUrlSaved = true;
+          this._authService.getUserData()
+          .pipe(take(1))
+          .subscribe({
+            next: (user) => {
+              this._authService.currentUserSubject.next(user);
+            },
+            error: (err) => console.error('Failed to refresh user data', err)
+          });
+        },
+        error: () => {
+          this.isSavingExternalUrl = false;
+        }
+      });
   }
 
   ngOnDestroy() {

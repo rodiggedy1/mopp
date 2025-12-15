@@ -13,11 +13,13 @@ declare const Calendly: any;
 export class JobSubmittedQualifiedComponent implements AfterViewInit{
   calendlyProfileUrl: string | null = null;
   showCalendlyPopup = false;
+  externalCalendarUrl: string | null = null;
 
   constructor(
       public _applyJobStepperStatusService: ApplyJobStepperStatusService,
     ) {
       this.calendlyProfileUrl = this._applyJobStepperStatusService.calendlyUrl;
+      this.externalCalendarUrl = this._applyJobStepperStatusService.externalCalendarUrl;
     }
 
     ngAfterViewInit(): void {
@@ -51,6 +53,14 @@ export class JobSubmittedQualifiedComponent implements AfterViewInit{
         });
       } else {
         console.error('Calendly script not loaded yet');
+      }
+    }
+
+    handleCalendarClick() {
+      if (this.calendlyProfileUrl) {
+        this.openCalendlyPopup();
+      } else if (this.externalCalendarUrl) {
+        window.open(this.externalCalendarUrl, '_blank');
       }
     }
 }
