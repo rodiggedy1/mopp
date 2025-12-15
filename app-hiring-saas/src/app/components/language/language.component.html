@@ -1,0 +1,27 @@
+<div
+  [matMenuTriggerFor]="menuLng"
+  (click)="$event.stopPropagation()"
+  class="d-flex j-c-between align-center lng-pill"
+>
+  <span>{{ selectedLanguage?.translationKey | translate }}</span>
+  <div
+    class="lng-img"
+    [style.backgroundImage]="'url(' + selectedLanguage?.flag + ')'"
+  ></div>
+</div>
+
+<mat-menu #menuLng="matMenu" [hasBackdrop]="false" class="menu-area">
+  <div class="pl-15 pr-15 menu-area">
+    <div
+      class="user-menu-link text-basic d-flex j-c-between menu-area"
+      *ngFor="let language of languages"
+      (click)="setLanguage(language)"
+    >
+      {{ language?.translationKey | translate }}
+      <div
+        class="lng-img"
+        [style.backgroundImage]="'url(' + language?.flag + ')'"
+      ></div>
+    </div>
+  </div>
+</mat-menu>

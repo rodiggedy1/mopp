@@ -1,0 +1,260 @@
+<!-- New UI -->
+<div class="grid lg:grid-cols-12 gap-8 items-start relative md:container lg:min-w-[1062px] w-full p-2">
+    <div class="lg:col-span-5 space-y-6">
+      <div class="group relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+        <div class="relative bg-white/90 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-500">
+            <div class="flex items-start space-x-4 mb-6">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles w-7 h-7 text-white">
+                    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+                    <path d="M5 3v4"></path>
+                    <path d="M19 17v4"></path>
+                    <path d="M3 5h4"></path>
+                    <path d="M17 19h4"></path>
+                  </svg>
+              </div>
+              <div class="flex-1">
+                  <h2 class="text-2xl font-bold text-slate-900 mb-2">Your Moment to Shine</h2>
+                  <p class="text-slate-600">Take 60 seconds to showcase your expertise</p>
+              </div>
+            </div>
+            <div class="relative">
+              <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-500 to-purple-600 rounded-full"></div>
+              <div class="pl-6 py-4">
+                  <p class="text-slate-800 text-lg leading-relaxed font-medium">Tell us about a time when you had to solve a complex problem at work. What was your approach, and what was the outcome?</p>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="group relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+        <div class="relative bg-white/90 backdrop-blur-xl rounded-3xl p-6 border border-white/20 shadow-xl">
+            <div class="flex items-center space-x-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-target w-5 h-5 text-white">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="6"></circle>
+                    <circle cx="12" cy="12" r="2"></circle>
+                  </svg>
+              </div>
+              <h3 class="font-bold text-slate-900">Pro Tips</h3>
+            </div>
+            <div class="space-y-3">
+              <div class="flex items-start space-x-3 group/tip">
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center mt-0.5 group-hover/tip:scale-110 transition-transform duration-200">
+                    <div class="w-2 h-2 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600"></div>
+                  </div>
+                  <p class="text-slate-700 text-sm leading-relaxed">Maintain eye contact with the camera</p>
+              </div>
+              <div class="flex items-start space-x-3 group/tip">
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center mt-0.5 group-hover/tip:scale-110 transition-transform duration-200">
+                    <div class="w-2 h-2 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600"></div>
+                  </div>
+                  <p class="text-slate-700 text-sm leading-relaxed">Use the STAR method (Situation, Task, Action, Result)</p>
+              </div>
+              <div class="flex items-start space-x-3 group/tip">
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center mt-0.5 group-hover/tip:scale-110 transition-transform duration-200">
+                    <div class="w-2 h-2 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600"></div>
+                  </div>
+                  <p class="text-slate-700 text-sm leading-relaxed">Speak with confidence and enthusiasm</p>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lg:col-span-7 relative">
+      <div class="w-full flex justify-end">
+        <button (click)="onContinueStep()" *ngIf="buttonAction == 'continue'"
+            type="submit"
+            class="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center font-['Outfit-medium']">
+            {{ 'JOB_APPLICATIONS.CONTINUE' | translate }}
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+
+        <button class="group relative overflow-hidden mb-3" (click)="submitForm()" *ngIf="buttonAction == 'submit'" [disabled]="loading">
+          <div class="absolute inset-0 bg-gradient-to-r from-slate-600 to-slate-700 rounded-xl blur-lg group-hover:blur-xl transition-all duration-300 opacity-50" bis_skin_checked="1"></div>
+          <div class="relative bg-gradient-to-r from-emerald-500 to-green-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center space-x-2" bis_skin_checked="1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle2 w-5 h-5">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="m9 12 2 2 4-4"></path>
+              </svg>
+              <span>{{ 'JOB_APPLICATIONS.SUBMIT_APPLICATION' | translate }}</span>
+          </div>
+        </button>
+      </div>
+
+      <div class="bg-white/90 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-xl w-full">
+        <div class="group relative" *ngIf="currentStep === 'ready'">
+          <div class="absolute inset-0 bg-gradient-to-r from-slate-900/10 to-slate-700/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+          <div class="relative">
+              <div class="relative mb-8" [ngClass]="{'hidden': recodVideoLater}">
+                <div class="aspect-video bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl overflow-hidden relative shadow-2xl">
+                    <div class="w-full h-full flex items-center justify-center relative">
+                      <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-500/20"></div>
+                      <div class="relative text-center z-10">
+                          <div class="w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-camera w-10 h-10 text-white">
+                                <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+                                <circle cx="12" cy="13" r="3"></circle>
+                            </svg>
+                          </div>
+                          <p class="text-white/90 text-lg font-medium mb-2">Ready to record?</p>
+                          <p class="text-white/70 text-sm">Your camera will activate when you start</p>
+                      </div>
+                    </div>
+                    <div class="absolute top-6 right-6">
+                      <div class="bg-black/70 backdrop-blur-sm text-white px-4 py-2 rounded-full shadow-lg">
+                          <div class="flex items-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-4 h-4">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span class="font-mono font-bold">1:00</span>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="flex items-center justify-center space-x-4 pl-10 pr-10">
+                <button class="group relative overflow-hidden" [ngClass]="{'flex-1' : !recodVideoLater}" (click)="startRecording()">
+                    <div class="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-300 opacity-70"></div>
+                    <div class="relative bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-10 py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center space-x-3">
+                      <div class="transition-transform duration-300 ">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play w-6 h-6">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                          </svg>
+                      </div>
+                      <span>Start Recording</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap w-5 h-5 transition-all duration-300 opacity-0">
+                          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                      </svg>
+                    </div>
+                </button>
+                <button *ngIf="!recodVideoLater" (click)="recordLater()" class="w-[35%] text-left text-slate-400 text-sm underline hover:no-underline hover:text-slate-500 transition-all duration-200 px-4 py-2">Record Later</button>
+              </div>
+              <div class="mt-6 text-center">
+                <p class="text-slate-500 font-medium">Ensure your camera and microphone permissions are enabled</p>
+              </div>
+          </div>
+        </div>
+
+        <div [ngClass]="{'hidden': currentStep != 'recording' && currentStep != 'review'}" class="relative">
+          <div class="relative mb-8" [ngClass]="{'hidden': recodVideoLater}">
+              <div class="aspect-video rounded-2xl overflow-hidden relative shadow-2xl 2">
+                <video class="w-[-webkit-fill-available] 1" #recordingPreview autoplay playsinline [style.transform]="'scaleX(-1)'"></video>
+                <video #recordedPreview controls class="absolute inset-0 w-full h-full object-cover rounded-lg z-10 2" [hidden]="!recordedVideoURL"></video>
+
+                <div *ngIf="currentStep === 'recording'" class="absolute top-6 left-6 flex items-center space-x-3 bg-red-500/90 backdrop-blur-sm text-white px-4 py-2 rounded-full shadow-lg">
+                    <div class="w-3 h-3 bg-white rounded-full animate-pulse"></div>
+                    <span class="font-semibold text-sm">RECORDING</span>
+                </div>
+                <div *ngIf="currentStep === 'recording'" class="absolute top-6 right-6">
+                    <div class="bg-black/70 backdrop-blur-sm text-white px-4 py-2 rounded-full shadow-lg">
+                      <div class="flex items-center space-x-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-4 h-4">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                          </svg>
+                          <span class="font-mono font-bold">{{ recordingTime }}</span>
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <div class="w-full bg-white/20 rounded-full h-1">
+                          <div class="bg-gradient-to-r from-red-400 to-red-600 h-1 rounded-full transition-all duration-1000" [style.width.%]="recordingProgress"></div>
+                      </div>
+                    </div>
+                </div>
+
+                <div *ngIf="currentStep === 'review' && !showReviewOverlay" class="absolute top-6 right-6">
+                  <div class="bg-black/70 backdrop-blur-sm text-white px-4 py-2 rounded-full shadow-lg">
+                    <div class="flex items-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-4 h-4">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span class="font-mono font-bold">{{ finalRecordingTime }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="currentStep === 'review' && showReviewOverlay" lass="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center">
+                    <div class="text-center">
+                      <div class="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mx-auto mb-4 shadow-2xl animate-bounce">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle2 w-10 h-10 text-white">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="m9 12 2 2 4-4"></path>
+                          </svg>
+                      </div>
+                      <p class="text-white font-semibold text-lg mb-2">Perfect!</p>
+                      <p class="text-white/80">Your response has been recorded</p>
+                    </div>
+                </div>
+
+              </div>
+          </div>
+          <div *ngIf="currentStep === 'recording'" class="flex items-center justify-center space-x-4">
+              <button class="group relative overflow-hidden" (click)="stopRecording()">
+                <div class="absolute inset-0 bg-gradient-to-r from-red-600 to-pink-600 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-300 opacity-70"></div>
+                <div class="relative bg-gradient-to-r from-red-500 to-pink-600 text-white px-10 py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center space-x-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square w-6 h-6">
+                      <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                    </svg>
+                    <span>Stop Recording</span>
+                </div>
+              </button>
+          </div>
+          <div *ngIf="currentStep === 'recording'" class="mt-6 text-center">
+              <div class="flex items-center justify-center space-x-3 text-red-600 font-semibold">
+                <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mic w-5 h-5">
+                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                    <line x1="12" x2="12" y1="19" y2="22"></line>
+                </svg>
+                <span>Recording your response...</span>
+              </div>
+          </div>
+
+          <div *ngIf="currentStep === 'review'" class="flex items-center justify-center space-x-4">
+            <div class="flex items-center space-x-4 w-[80%]">
+              <button class="w-[50%] group relative overflow-hidden" *ngIf="!recodVideoLater" (click)="retakeRecording()">
+                  <div class="absolute inset-0 bg-slate-200 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-300"></div>
+                  <div class="relative bg-white border-2 border-slate-200 text-slate-700 px-8 py-4 rounded-2xl font-semibold hover:border-slate-300 hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center space-x-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw w-5 h-5">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                        <path d="M3 3v5h5"></path>
+                    </svg>
+                    <span>Re-record</span>
+                  </div>
+              </button>
+              <button *ngIf="!recodVideoLater" (click)="recordLater()" class="w-[50%] text-left text-slate-400 text-sm underline hover:no-underline hover:text-slate-500 transition-all duration-200 px-4 py-2">Record Later</button>
+            </div>
+          </div>
+          <div *ngIf="currentStep === 'review' && !recodVideoLater" class="mt-6 text-center">
+              <div class="flex items-center justify-center space-x-3 text-emerald-600 font-semibold">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle2 w-5 h-5">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="m9 12 2 2 4-4"></path>
+                </svg>
+                <span>Great job! Ready to move forward?</span>
+              </div>
+          </div>
+        </div>
+        <div class="flex items-center justify-center space-x-3 text-emerald-600 font-semibold font-['Outfit'] text-emerald-600 mt-6" *ngIf="recodVideoLater">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle2 w-5 h-5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="m9 12 2 2 4-4"></path>
+          </svg>
+          <span>You chose to record your video later. <br>You can always come back to this step before submitting your application.</span>
+        </div>
+      </div>
+
+    </div>
+ </div>
+
+
+
+

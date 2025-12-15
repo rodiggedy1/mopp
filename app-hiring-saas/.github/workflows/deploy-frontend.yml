@@ -1,0 +1,34 @@
+name: Deploy Angular App
+
+on:
+  push:
+    branches: [ main, development ]
+
+jobs:
+  deploy:
+    runs-on: [self-hosted]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Stop existing container
+      run: |
+        docker stop saas-app || true
+        docker rm saas-app || true
+        docker rmi saas/angular || true
+      continue-on-error: true
+    
+    - name: Build and run Angular app
+      run: |
+        docker compose up -d --build
+    
+    - name: Clean up old images
+      run: |
+        docker image prune -f
+      continue-on-error: true
+    
+    - name: Verify deployment
+      run: |
+        sleep 10
+        curl -f http://localhost:7090 || exit 1

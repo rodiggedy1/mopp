@@ -1,0 +1,36 @@
+<div class="font fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden">
+    <div class="flex items-center justify-between p-4 border-b border-gray-200">
+      <div class="flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play w-5 h-5 text-blue-600 mr-2">
+          <polygon points="5 3 19 12 5 21 3"></polygon>
+        </svg>
+        <h3 class="text-lg font-semibold text-gray-900">{{data.candidateName}}</h3>
+        <span class="ml-2 text-lg font-semibold text-gray-900">{{'CANDIDATES.VIDEO_APPLICATION' | translate}}</span>
+      </div>
+      <button class="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
+              (click)="closeDialog()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5">
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="p-4">
+      <div class="relative bg-black rounded-lg overflow-hidden">
+        <video controls autoplay class="w-full h-auto max-h-[70vh]" #videoPlayer>
+            <source [src]="data.videoUrl" type="video/mp4"/>
+            <source [src]="data.videoUrl" type="video/webm"/>
+            <source [src]="data.videoUrl" type="video/ogg">
+          {{'CANDIDATES.YOUR_BROWSER_DOES_NOT_SUPPORT_THE_VIDEO_TAG' | translate}}
+        </video>
+      </div>
+    </div>
+    <div class="mb-4 text-center">
+      <p class="text-sm text-gray-600">
+        {{'CANDIDATES.VIDEO_APPLICATION_SUBMITTED_BY' | translate}}
+        <span>{{data.candidateName}}</span>
+      </p>
+    </div>
+  </div>
+</div>

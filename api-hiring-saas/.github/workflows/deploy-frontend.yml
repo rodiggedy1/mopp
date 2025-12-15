@@ -1,0 +1,33 @@
+name: Deploy Angular Frontend
+
+on:
+  push:
+    branches: [ development ]
+    paths: [ 'hirihg-app/**' ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Stop existing container
+      run: |
+        docker stop hirihg-app || true
+        docker rm hirihg-app || true
+        docker rmi hirihg/angular || true
+      continue-on-error: true
+    
+    - name: Build Angular Docker image
+      run: |
+        cd hirihg-app
+        docker build -t hirihg/angular .
+    
+    - name: Run Angular container
+      run: |
+        docker run -d \
+          --name hirihg-app \
+          -p 7090:80 \
+          --restart unless-stopped \
+          hirihg/angular

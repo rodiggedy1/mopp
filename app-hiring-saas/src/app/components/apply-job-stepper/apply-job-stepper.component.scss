@@ -1,0 +1,37 @@
+.checkbox-option {
+    text-transform: lowercase;
+}
+
+.checkbox-option:first-letter {
+   text-transform: capitalize; 
+}
+
+mat-spinner {
+    position: absolute;
+    left: calc(50% - 30px);
+    top: 200px;
+}
+
+::ng-deep {
+    .mdc-text-field--focused .mat-mdc-notch-piece {
+        border-color: none !important;
+    }
+
+    .mdc-notched-outline__leading, .mdc-notched-outline__trailing {
+        border-color: #d7d7d7 !important;
+    }
+
+    .mat-mdc-select-panel {
+        background-color: white !important;
+    }
+
+    .mdc-notched-outline__notch {
+        border-top: none !important;
+        border-bottom: 1px solid #d7d7d7 !important;
+        border-right: none !important;
+    }
+}
+
+mat-select {
+  background-color: white;
+}

@@ -1,0 +1,152 @@
+<div class="font translate-x-full fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform lg:translate-x-0 lg:static lg:inset-0 transition-transform duration-300 h-screen">
+  <div class="flex items-center justify-between p-6 border-b border-gray-200">
+    <div class="flex items-center space-x-2">
+      <div class="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" class="w-8 h-8">
+          <rect x="0" y="0" width="32" height="32" rx="4" ry="4" fill="#334155" />
+          <circle cx="12" cy="11" r="3.5" fill="none" stroke="white" stroke-width="1.5" />
+          <path d="M5 22 C5 18, 8 16, 12 16 C16 16, 19 18, 19 22"
+                fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+          <path d="M20 8.5 A 3 3 0 0 1 20 14.5"
+                fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+          <path d="M20 17 C23 17, 25 19, 25 22"
+                fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+      </div><span class="text-xl font-bold text-slate-700">Mopp</span>
+    </div>
+    <button class="lg:hidden text-gray-500 hover:text-gray-700">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="lucide lucide-x w-6 h-6">
+        <path d="M6 6 18 18"></path>
+        <path d="M6 18 18 6"></path>
+      </svg>
+    </button>
+  </div>
+  <nav class="flex-1 px-4 py-6 space-y-2">
+    <a [routerLink]="'/dashboard'" [class]="'flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ' +
+               (isActiveRoute('/dashboard') ?
+                'bg-blue-50 text-blue-700 border-r-2 border-blue-600' :
+                'text-gray-700 hover:bg-gray-100')" data-discover="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="lucide lucide-layout-dashboard w-5 h-5 mr-3">
+        <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+        <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+        <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+        <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+      </svg>
+      {{'SIDEBAR.DASHBOARD' | translate}}
+    </a>
+
+    <a [routerLink]="'/forms'" [class]="'flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ' +
+               (isActiveRoute('/forms') ?
+                'bg-blue-50 text-blue-700 border-r-2 border-blue-600' :
+                'text-gray-700 hover:bg-gray-100')" data-discover="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="lucide lucide-file-text w-5 h-5 mr-3">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14,2 14,8 20,8"></polyline>
+        <line x1="16" x2="8" y1="13" y2="13"></line>
+        <line x1="16" x2="8" y1="17" y2="17"></line>
+        <polyline points="10,9 9,9 8,9"></polyline>
+      </svg>
+      {{'SIDEBAR.FORMS' | translate}}
+    </a>
+
+    <a [routerLink]="'/candidates'" [class]="'flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ' +
+               (isActiveRoute('/candidates') ?
+                'bg-blue-50 text-blue-700 border-r-2 border-blue-600' :
+                'text-gray-700 hover:bg-gray-100')" data-discover="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="lucide lucide-users w-5 h-5 mr-3">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+      {{'SIDEBAR.CANDIDATES' | translate}}
+    </a>
+
+    <a [routerLink]="'/screening'" [class]="'flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ' +
+               (isActiveRoute('/screening') ?
+                'bg-blue-50 text-blue-700 border-r-2 border-blue-600' :
+                'text-gray-700 hover:bg-gray-100')" data-discover="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="lucide lucide-kanban w-5 h-5 mr-3">
+        <path d="M6 5v11"></path>
+        <path d="M12 5v6"></path>
+        <path d="M18 5v14"></path>
+      </svg>
+      {{'SIDEBAR.SCREENING' | translate}}
+    </a>
+
+    <a [routerLink]="'/hired'" [class]="'flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ' +
+               (isActiveRoute('/hired') ?
+                'bg-blue-50 text-blue-700 border-r-2 border-blue-600' :
+                'text-gray-700 hover:bg-gray-100')" data-discover="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="lucide lucide-user-check w-5 h-5 mr-3">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <polyline points="16 11 18 13 22 9"></polyline>
+      </svg>
+      {{'SIDEBAR.HIRED' | translate}}
+    </a>
+    <a [routerLink]="'/subscription'"
+      [class]="'flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ' +
+                (isActiveRoute('/subscription') ?
+                'bg-blue-50 text-blue-700 border-r-2 border-blue-600' :
+                'text-gray-700 hover:bg-gray-100')"
+      data-discover="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="lucide lucide-credit-card w-5 h-5 mr-3">
+        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+        <line x1="2" y1="10" x2="22" y2="10"></line>
+      </svg>
+      {{'SIDEBAR.SUBSCRIPTION' | translate}}
+    </a>
+
+    <a [routerLink]="'/schedules'"
+      [class]="'flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ' +
+                (isActiveRoute('/schedules') ?
+                'bg-blue-50 text-blue-700 border-r-2 border-blue-600' :
+                'text-gray-700 hover:bg-gray-100')"
+      data-discover="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-5 h-5 mr-3">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </svg>
+      Schedules
+    </a>
+  </nav>
+  <div class="p-4 border-t border-gray-200">
+    <div class="flex items-center mb-4 cursor-pointer">
+      <div class="h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center">
+        <span class="text-blue-600 font-semibold">{{user?.firstName?.charAt(0)}}</span>
+      </div>
+      <div class="ml-3">
+        <p class="text-sm font-medium text-gray-900">{{user?.firstName}} {{user?.lastName}}</p>
+        <p class="text-xs text-gray-500">{{user?.type}}</p>
+      </div>
+    </div>
+    <button class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+      (click)="logout()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="lucide lucide-log-out w-4 h-4 mr-3">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+        <polyline points="16 17 21 12 16 7"></polyline>
+        <line x1="21" x2="9" y1="12" y2="12"></line>
+      </svg>
+      {{'SIDEBAR.SIGN_OUT' | translate}}
+    </button>
+  </div>
+</div>

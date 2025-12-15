@@ -1,0 +1,141 @@
+<div [formGroup]="form" (ngSubmit)="submitForm()" class="md:container lg:min-w-[1062px] w-full bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl shadow-lg border border-gray-200/50 backdrop-blur-xl p-10">
+  <input type="hidden" name="application_id" value="b401865e-78a8-4e68-a1ae-212c80c6eda5">
+  <div class="space-y-8">
+
+    <div>
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 font-['Outfit-bold']">{{ 'JOB_APPLICATIONS.JOB_REQUIREMENTS' | translate }}</h2>
+      <div class="space-y-6">
+
+        <!-- Professional Cleaning Experience -->
+        <div>
+          <p class="text-gray-700 font-medium mb-4 font-['Outfit-medium']">{{ 'JOB_APPLICATIONS.HAS_CLEANING_EXPERIENCE_QUESTION' | translate }}</p>
+          <div class="grid grid-cols-2 gap-4">
+            <button type="button" (click)="form.controls['hasCleaningExperience'].setValue(true)" 
+              [ngClass]="{'border-green-300 bg-green-50 text-green-700': form.controls['hasCleaningExperience'].value === true}"
+              class="font-['Outfit-medium'] flex items-center justify-center px-6 py-4 border rounded-lg transition-colors border-gray-300 hover:border-green-300">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              {{ 'JOB_APPLICATIONS.YES' | translate }}
+            </button>
+            <button type="button" (click)="form.controls['hasCleaningExperience'].setValue(false)" 
+              [ngClass]="{'bg-red-50 text-red-700 border-red-300': form.controls['hasCleaningExperience'].value === false}"
+              class="font-['Outfit-medium'] flex items-center justify-center px-6 py-4 border rounded-lg transition-colors border-gray-300 hover:border-red-300">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+              {{ 'JOB_APPLICATIONS.NO' | translate }}
+            </button>
+          </div>
+          <p *ngIf="form.controls['hasCleaningExperience'].touched && form.controls['hasCleaningExperience'].invalid" class="text-red-500 text-sm mt-1">
+            {{ 'JOB_APPLICATIONS.HAS_CLEANING_EXPERIENCE_REQUIRED' | translate }}
+          </p>
+        </div>
+
+        <!-- Bank Account -->
+        <div>
+          <p class="text-gray-700 font-medium mb-4 font-['Outfit-medium']">{{ 'JOB_APPLICATIONS.HAS_BANK_ACCOUNT_QUESTION' | translate }}</p>
+          <div class="grid grid-cols-2 gap-4">
+            <button type="button" (click)="form.controls['hasBankAccount'].setValue(true)"
+              [ngClass]="{'bg-green-50 text-green-700 border-green-300': form.controls['hasBankAccount'].value === true}"
+              class="font-['Outfit-medium'] flex items-center justify-center px-6 py-4 border rounded-lg transition-colors border-gray-300 hover:border-green-300">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              {{ 'JOB_APPLICATIONS.YES' | translate }}
+            </button>
+            <button type="button" (click)="form.controls['hasBankAccount'].setValue(false)"
+              [ngClass]="{'bg-red-50 text-red-700 border-red-300': form.controls['hasBankAccount'].value === false}"
+              class="font-['Outfit-medium'] flex items-center justify-center px-6 py-4 border rounded-lg transition-colors border-gray-300 hover:border-red-300">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+              {{ 'JOB_APPLICATIONS.NO' | translate }}
+            </button>
+          </div>
+          <p *ngIf="form.controls['hasBankAccount'].touched && form.controls['hasBankAccount'].invalid" class="text-red-500 text-sm mt-1">
+            {{ 'JOB_APPLICATIONS.HAS_BANK_ACCOUNT_REQUIRED' | translate }}
+          </p>
+        </div>
+
+        <!-- Authorized to Work -->
+        <div>
+          <p class="text-gray-700 font-medium mb-4 font-['Outfit-medium']">{{ 'JOB_APPLICATIONS.IS_AUTHORIZED_TO_WORK_QUESTION' | translate }}</p>
+          <div class="grid grid-cols-2 gap-4">
+            <button type="button" (click)="form.controls['isAuthorizedToWork'].setValue(true)"
+              [ngClass]="{'bg-green-50 text-green-700 border-green-300': form.controls['isAuthorizedToWork'].value === true}"
+              class="font-['Outfit-medium'] flex items-center justify-center px-6 py-4 border rounded-lg transition-colors border-gray-300 hover:border-green-300">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              {{ 'JOB_APPLICATIONS.YES' | translate }}
+            </button>
+            <button type="button" (click)="form.controls['isAuthorizedToWork'].setValue(false)"
+              [ngClass]="{'bg-red-50 text-red-700 border-red-300': form.controls['isAuthorizedToWork'].value === false}"
+              class="font-['Outfit-medium'] flex items-center justify-center px-6 py-4 border rounded-lg transition-colors border-gray-300 hover:border-red-300">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+              {{ 'JOB_APPLICATIONS.NO' | translate }}
+            </button>
+          </div>
+          <p *ngIf="form.controls['isAuthorizedToWork'].touched && form.controls['isAuthorizedToWork'].invalid" class="text-red-500 text-sm mt-1">
+            {{ 'JOB_APPLICATIONS.IS_AUTHORIZED_TO_WORK_REQUIRED' | translate }}
+          </p>
+        </div>
+
+        <!-- Consent Background Check -->
+        <div>
+          <p class="text-gray-700 font-medium mb-4 font-['Outfit-medium']">{{ 'JOB_APPLICATIONS.CONSENT_BACKGROUND_CHECK_QUESTION' | translate }}</p>
+          <div class="grid grid-cols-2 gap-4">
+            <button type="button" (click)="form.controls['consentBackgroundCheck'].setValue(true)"
+              [ngClass]="{'border-green-300 bg-green-50 text-green-700': form.controls['consentBackgroundCheck'].value === true}"
+              class="font-['Outfit-medium'] flex items-center justify-center px-6 py-4 border rounded-lg transition-colors border-gray-300 hover:border-green-300">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              {{ 'JOB_APPLICATIONS.YES' | translate }}
+            </button>
+            <button type="button" (click)="form.controls['consentBackgroundCheck'].setValue(false)"
+              [ngClass]="{'bg-red-50 text-red-700 border-red-300': form.controls['consentBackgroundCheck'].value === false}"
+              class="font-['Outfit-medium'] flex items-center justify-center px-6 py-4 border rounded-lg transition-colors border-gray-300 hover:border-red-300">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+              {{ 'JOB_APPLICATIONS.NO' | translate }}
+            </button>
+          </div>
+          <p *ngIf="form.controls['consentBackgroundCheck'].touched && form.controls['consentBackgroundCheck'].invalid" class="text-red-500 text-sm mt-1">
+            {{ 'JOB_APPLICATIONS.CONSENT_BACKGROUND_CHECK_REQUIRED' | translate }}
+          </p>
+        </div>
+
+        <!-- Cleaning Experience Description -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2 font-['Outfit-medium']">
+            {{ 'JOB_APPLICATIONS.CLEANING_EXPERIENCE_DESCRIPTION' | translate }}
+          </label>
+          <textarea rows="6" formControlName="cleaningExperienceDescription"
+            placeholder="{{ 'JOB_APPLICATIONS.CLEANING_EXPERIENCE_DESCRIPTION_PLACEHOLDER' | translate }}"
+            class="placeholder:font-['Outfit'] w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none">
+          </textarea>
+          <p *ngIf="form.controls['cleaningExperienceDescription'].touched && form.controls['cleaningExperienceDescription'].invalid" class="text-red-500 text-sm mt-1">
+            {{ 'JOB_APPLICATIONS.CLEANING_EXPERIENCE_DESCRIPTION_REQUIRED' | translate }}
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="flex mt-8 pt-6 border-t border-gray-200 justify-end">
+      <button type="button" (click)="goToIncome()" class="font-['Outfit-medium'] px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center">
+        {{ 'JOB_APPLICATIONS.CONTINUE' | translate }}
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</div>

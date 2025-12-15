@@ -1,0 +1,37 @@
+name: Deploy .NET Core Backend
+
+on:
+  push:
+    branches: [ development ]
+    
+jobs:
+  deploy:
+    runs-on: self-hosted
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Stop existing API containers
+      run: |
+        cd /home/github-runner
+        export ASPNETCORE_ENVIRONMENT=Production
+        docker compose down api worker emailservice notificationservice || true
+        docker rmi saas/api saas/worker saas/emailservice saas/notificationservice || true
+      continue-on-error: true
+    
+    - name: Build and deploy backend services
+      run: |
+        cd /home/github-runner
+        
+        # Copy source code to runner directory
+        cp -r $GITHUB_WORKSPACE/src ./ || true
+        cp $GITHUB_WORKSPACE/docker-compose.yml ./ || true
+        
+        # Set environment and build services
+        export ASPNETCORE_ENVIRONMENT=Production
+        
+        # Build and start the backend services
+        docker compose up -d --build api worker emailservice notificationservice
+        
+        # Clean up copied files
+        rm -rf src || true

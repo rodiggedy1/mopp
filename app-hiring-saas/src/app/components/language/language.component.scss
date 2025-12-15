@@ -1,0 +1,57 @@
+.lng-pill {
+    background-color: #f9f9f9;
+    padding: 5px 0px 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+
+    span {
+        font-size: 12px;
+        transition: all 0.3s ease-in-out;
+    }
+}
+
+.lng-pill:hover {
+    span {
+        color: #1b84ff;
+        transition: all 0.3s ease-in-out;
+    }
+}
+
+.user-menu-link {
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    padding: 10px 10px;
+    margin: 5px 0px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.user-menu-link:hover {
+    background-color: #f9f9f9;
+    color: #1b84ff;
+    transition: all 0.3s ease-in-out;
+}
+
+.lng-img {
+    width: 20px;
+    height: 20px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.j-c-between {
+    justify-content: space-between;
+}
+
+.align-center {
+    align-items: center;
+}

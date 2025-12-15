@@ -1,0 +1,166 @@
+<div class="min-h-screen bg-gray-50">
+  <div class="flex h-screen bg-gray-50">
+    <app-sidebar></app-sidebar>
+    <div class="font flex-1 flex flex-col overflow-hidden lg:ml-0">
+      <header class="bg-white shadow-sm border-b border-gray-200 p-4 lg:px-6">
+        <div class="flex items-center justify-between">
+          <button class="lg:hidden text-gray-500 hover:text-gray-700">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-menu w-6 h-6">
+              <line x1="4" x2="20" y1="12" y2="12"></line>
+              <line x1="4" x2="20" y1="6" y2="6"></line>
+              <line x1="4" x2="20" y1="18" y2="18"></line>
+            </svg>
+          </button>
+          <div class="flex-1 lg:flex lg:items-center lg:justify-between">
+            <h6 class="text-lg font-semibold text-gray-900 ml-4 lg:ml-0">{{'SIDEBAR.CANDIDATES' | translate}}</h6>
+          </div>
+        </div>
+      </header>
+      <main class="flex-1 overflow-auto p-4 lg:p-6">
+        <div class="space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h1 class="text-2xl font-bold text-gray-900">{{'SIDEBAR.CANDIDATES' | translate}}</h1>
+              <p class="mt-1 text-gray-600">{{'CANDIDATES.MANAGE_AND_REVIEW_JOB_APPLICATIONS' | translate}}</p>
+            </div>
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl border border-gray-200 space-y-4 sm:space-y-0 sm:flex sm:items-center sm:space-x-4">
+            <div class="flex-1">
+              <div class="relative">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" placeholder="{{'CANDIDATES.SEARCH_CANDIDATES' | translate}}"
+                  class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  [(ngModel)]="searchTerm" (input)="onSearchChange()">
+              </div>
+            </div>
+            <div class="flex items-center space-x-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-filter text-gray-400 w-5 h-5">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+              </svg>
+              <select class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" [(ngModel)]="selectedStatus" (change)="onStatusChange()">
+                <option value="all">{{'CANDIDATES.ALL_CANDIDATES' | translate}} ({{statusCounts.all}})</option>
+                <option value="applied">{{'CANDIDATES.APPLIED' | translate}} ({{statusCounts.applied}})</option>
+                <option value="screening">{{'SIDEBAR.SCREENING' | translate}} ({{statusCounts.screening}})</option>
+                <option value="interview">{{'CANDIDATES.INTERVIEW' | translate}} ({{statusCounts.interview}})</option>
+                <option value="reference">{{'CANDIDATES.REFERENCE' | translate}} ({{statusCounts.reference}})</option>
+                <option value="hired">{{'SIDEBAR.HIRED' | translate}} ({{statusCounts.hired}})</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex flex-col justify-between"
+              *ngFor="let candidate of filteredCandidates">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center">
+                  <div class="w-12 h-12 rounded-full flex items-center justify-center overflow-hidden">
+                    <ng-container *ngIf="candidate?.profilePicture?.url; else initials">
+                      <img [src]="candidate?.profilePicture?.url" alt="{{ candidate.firstName }}" class="w-full h-full object-cover">
+                    </ng-container>
+                    <ng-template #initials>
+                      <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                        <span class="text-blue-600 font-semibold text-lg">
+                          {{ candidate.firstName?.charAt(0) }}
+                        </span>
+                      </div>
+                    </ng-template>
+                  </div>
+                  <div class="ml-3">
+                    <h3 class="text-lg font-semibold text-gray-900">{{candidate.firstName}} {{candidate.lastName}}</h3>
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                      [ngClass]="getStatusClass(candidate.status?.name)">{{candidate.status?.name}}</span>
+                  </div>
+                </div>
+                <button *ngIf="candidate.applicationVideo"
+                  class="p-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors group"
+                  title="{{ 'CANDIDATES.VIEW_VIDEO_APPLICATION' | translate }}" (click)="viewVideoApplication(candidate)">
+                  <div class="relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-video w-5 h-5">
+                      <path d="m22 8-6 4 6 4V8Z"></path>
+                      <rect width="14" height="12" x="2" y="6" rx="2" ry="2"></rect>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-play w-2 h-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                      <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                  </div>
+                </button>
+              </div>
+              <div class="space-y-3 mb-4">
+                <div class="flex items-center text-sm text-gray-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-mail w-4 h-4 mr-2">
+                    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                    <path d="m22 7-10 5L2 7"></path>
+                  </svg>
+                  <span class="truncate">{{candidate.emailAddress}}</span>
+                </div>
+                <div class="flex items-center text-sm text-gray-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-phone w-4 h-4 mr-2">
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                    </path>
+                  </svg>
+                  <span>{{candidate.phoneNumber}}</span>
+                </div>
+                <div class="flex items-center text-sm text-gray-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-calendar w-4 h-4 mr-2">
+                    <path d="M8 2v4"></path>
+                    <path d="M16 2v4"></path>
+                    <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                    <path d="M3 10h18"></path>
+                  </svg>
+                  <span>{{'CANDIDATES.APPLIED' | translate}} {{candidate.created | date: 'MM/dd/yyyy'}}</span>
+                </div>
+              </div>
+              <div class="mb-4">
+                <p class="text-sm text-gray-600 mb-2">{{'CANDIDATES.EXPERIENCE' | translate}}:</p>
+                <div class="text-sm font-medium text-gray-900">
+                  <p class="line-clamp-1 text-sm font-medium text-gray-900"
+                    [attr.title]="getCandidateExperience(candidate)">
+                    {{ getCandidateExperience(candidate) }}
+                  </p>
+                </div>
+              </div>
+              <div class="mb-4">
+                <p class="text-sm text-gray-600 mb-2">{{'CANDIDATES.SKILLS' | translate}}:</p>
+                <div class="flex flex-wrap gap-1">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800" *ngFor="let skill of getCandidateSkills(candidate)">
+                    {{skill}}
+                  </span>
+                </div>
+              </div>
+              <a class="w-full bg-blue-50 hover:bg-blue-100 text-blue-700 py-2 px-4 rounded-lg text-center font-medium transition-colors inline-flex items-center justify-center"
+                [href]="'/candidates/' + candidate.id" data-discover="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-eye w-4 h-4 mr-2">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                {{'CANDIDATES.VIEW_DETAILS' | translate}}
+              </a>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  web:
+    image: saas/angular
+    container_name: saas-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7090:80"
+    restart: unless-stopped
